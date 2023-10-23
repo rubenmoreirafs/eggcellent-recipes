@@ -27,7 +27,7 @@ CREATE TABLE ingredient(
     PRIMARY KEY (id)
 );
 
-CREATE TABLE recipe_ingredient(
+CREATE TABLE ingredient_list(
     id INTEGER AUTO_INCREMENT,
     recipe_id INTEGER,
     ingredient_id INTEGER,
@@ -38,7 +38,7 @@ CREATE TABLE recipe_ingredient(
     FOREIGN KEY (ingredient_id) REFERENCES ingredient (id)
 );
 
-CREATE TABLE user_recipe(
+CREATE TABLE recipe_book(
     id INTEGER AUTO_INCREMENT,
     user_id INTEGER,
     recipe_id INTEGER,
@@ -60,15 +60,15 @@ INSERT INTO ingredient values (5, 'sugar');
 INSERT INTO recipe values (1, 'Pancakes', "Pour milk, whisk eggs.. blah blah", 1, '2023-10-04', 15, "/resources/photos/pancake.jpg");
 INSERT INTO recipe values (2, 'Waffles', "Mix all the stuffs together and pray", 3, '2023-10-04', 20, "/resources/photos/waffles.jpg");
 
-INSERT INTO user_recipe values (1, 1, 1);
-INSERT INTO user_recipe values (2, 1, 2);
-INSERT INTO user_recipe values (3, 2, 1);
-INSERT INTO user_recipe values (4, 3, 2);
+INSERT INTO recipe_book values (1, 1, 1);
+INSERT INTO recipe_book values (2, 1, 2);
+INSERT INTO recipe_book values (3, 2, 1);
+INSERT INTO recipe_book values (4, 3, 2);
 
-INSERT INTO recipe_ingredient values (1, 1, 1, 200, 'ml');
-INSERT INTO recipe_ingredient values (2, 1, 2, 2, 'unit');
-INSERT INTO recipe_ingredient values (3, 1, 3, 200, 'mg');
-INSERT INTO recipe_ingredient values (4, 2, 1, 200, 'ml');
-INSERT INTO recipe_ingredient values (5, 2, 2, 9, 'unit');
-INSERT INTO recipe_ingredient values (6, 2, 3, 200, 'mg');
+INSERT INTO ingredient_list values (1, 1, 1, 200, 'ml');
+INSERT INTO ingredient_list values (2, 1, 2, 2, 'unit');
+INSERT INTO ingredient_list values (3, 1, 3, 200, 'mg');
+INSERT INTO ingredient_list values (4, 2, 1, 200, 'ml');
+INSERT INTO ingredient_list values (5, 2, 2, 9, 'unit');
+INSERT INTO ingredient_list  values (6, 2, 3, 200, 'mg');
 
