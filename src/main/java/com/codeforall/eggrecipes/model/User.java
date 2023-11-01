@@ -2,7 +2,9 @@ package com.codeforall.eggrecipes.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -13,21 +15,21 @@ public class User {
 
     @ManyToMany
     @JoinTable(
-            name = "test_recipe_book",
+            name = "recipe_book",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "recipe_id")
     )
-    private List<Recipe> recipeBook = new ArrayList<>();
+    private Set<Recipe> recipeBook = new HashSet<>();
     private String username;
     @Transient
     private String password;
     private String email;
 
-    public List<Recipe> getRecipeBook() {
+    public Set<Recipe> getRecipeBook() {
         return recipeBook;
     }
 
-    public void setRecipeBook(List<Recipe> recipeBook) {
+    public void setRecipeBook(Set<Recipe> recipeBook) {
         this.recipeBook = recipeBook;
     }
 
