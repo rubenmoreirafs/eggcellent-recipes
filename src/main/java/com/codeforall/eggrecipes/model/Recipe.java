@@ -1,7 +1,9 @@
 package com.codeforall.eggrecipes.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "recipe")
@@ -9,12 +11,22 @@ public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @ManyToMany(mappedBy = "recipeBook")
+    private List<User> userList = new ArrayList<>();
     private String name;
     private String instructions;
     private int ownerId;
     private Date creationDate;
     private int prepTime;
     private String photoUrl;
+
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
+    }
 
     public int getId() {
         return id;
