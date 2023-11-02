@@ -1,5 +1,6 @@
 package com.codeforall.eggrecipes.controller;
 
+import com.codeforall.eggrecipes.model.Recipe;
 import com.codeforall.eggrecipes.model.User;
 import com.codeforall.eggrecipes.service.UserService;
 import view.MenuView;
@@ -18,5 +19,9 @@ public class MenuController {
 
     public User getNameById(int id) {
         return userService.getUserById(id);
+    }
+
+    public void createRecipe(int userId, int recipeId) {
+        userService.createRecipe(userId, recipeId);
     }
 }

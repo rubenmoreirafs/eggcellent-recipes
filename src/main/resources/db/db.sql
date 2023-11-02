@@ -2,6 +2,7 @@ DROP DATABASE IF EXISTS egg;
 CREATE DATABASE egg;
 USE egg;
 
+
 CREATE TABLE user(
     id INTEGER AUTO_INCREMENT,
     username VARCHAR(20) NOT  NULL UNIQUE,
@@ -14,7 +15,7 @@ CREATE TABLE recipe(
     id INTEGER AUTO_INCREMENT,
     name VARCHAR(20) NOT NULL,
     instructions TEXT NOT NULL,
-    owner_id INTEGER UNIQUE NOT NULL,
+    owner_id INTEGER  NOT NULL,
     creation_date DATE,
     prep_time INTEGER,
     photo_url VARCHAR(40),
@@ -27,22 +28,10 @@ CREATE TABLE ingredient(
     PRIMARY KEY (id)
 );
 
-CREATE TABLE ingredient_list(
-    id INTEGER AUTO_INCREMENT,
-    recipe_id INTEGER,
-    ingredient_id INTEGER,
-    quantity INTEGER,
-    measurement_type VARCHAR(20),
-    PRIMARY KEY (id),
-    FOREIGN KEY (recipe_id) REFERENCES recipe (id),
-    FOREIGN KEY (ingredient_id) REFERENCES ingredient (id)
-);
-
 CREATE TABLE recipe_book(
-    id INTEGER AUTO_INCREMENT,
     user_id INTEGER,
     recipe_id INTEGER,
-    PRIMARY KEY (id),
+    PRIMARY KEY (user_id, recipe_id),
     FOREIGN KEY (user_id) REFERENCES user (id),
     FOREIGN KEY (recipe_id) REFERENCES recipe (id)
 );
@@ -59,16 +48,10 @@ INSERT INTO ingredient values (5, 'sugar');
 
 INSERT INTO recipe values (1, 'Pancakes', "Pour milk, whisk eggs.. blah blah", 1, '2023-10-04', 15, "/resources/photos/pancake.jpg");
 INSERT INTO recipe values (2, 'Waffles', "Mix all the stuffs together and pray", 3, '2023-10-04', 20, "/resources/photos/waffles.jpg");
+INSERT INTO recipe values (3, 'Milky Milk', "If you milk the milk you will have it all milked", 1, '2023-10-04', 30, "/resources/photos/waffles.jpg");
 
 INSERT INTO recipe_book values (1, 1, 1);
 INSERT INTO recipe_book values (2, 1, 2);
 INSERT INTO recipe_book values (3, 2, 1);
 INSERT INTO recipe_book values (4, 3, 2);
-
-INSERT INTO ingredient_list values (1, 1, 1, 200, 'ml');
-INSERT INTO ingredient_list values (2, 1, 2, 2, 'unit');
-INSERT INTO ingredient_list values (3, 1, 3, 200, 'mg');
-INSERT INTO ingredient_list values (4, 2, 1, 200, 'ml');
-INSERT INTO ingredient_list values (5, 2, 2, 9, 'unit');
-INSERT INTO ingredient_list  values (6, 2, 3, 200, 'mg');
 

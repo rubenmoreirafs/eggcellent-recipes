@@ -11,11 +11,20 @@ public class Recipe {
     private int id;
     @ManyToMany(mappedBy = "recipeBook")
     private Set<User> userList = new HashSet<>();
+    /*@OneToMany
+    private List<Ingredient> ingredientList = new ArrayList<>();
+     */
     private String name;
     private String instructions;
+    @Column(name = "owner_id")
     private int ownerId;
+    @Column(name = "creation_date")
     private Date creationDate;
+
+    @Column(name = "prep_time")
     private int prepTime;
+
+    @Column(name = "photo_url")
     private String photoUrl;
 
     public Set<User> getUserList() {
@@ -37,6 +46,20 @@ public class Recipe {
     public String getName() {
         return name;
     }
+
+    /*
+    public List<Ingredient> getIngredientList() {
+        return ingredientList;
+    }
+
+     */
+
+    /*
+    public void setIngredientList(List<Ingredient> ingredientList) {
+        this.ingredientList = ingredientList;
+    }
+
+     */
 
     public void setName(String name) {
         this.name = name;
