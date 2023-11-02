@@ -2,7 +2,7 @@ DROP DATABASE IF EXISTS egg;
 CREATE DATABASE egg;
 USE egg;
 
-
+DROP TABLE IF EXISTS user;
 CREATE TABLE user(
     id INTEGER AUTO_INCREMENT,
     username VARCHAR(20) NOT  NULL UNIQUE,
@@ -11,6 +11,7 @@ CREATE TABLE user(
     PRIMARY KEY (id)
 );
 
+DROP TABLE IF EXISTS recipe;
 CREATE TABLE recipe(
     id INTEGER AUTO_INCREMENT,
     name VARCHAR(20) NOT NULL,
@@ -22,12 +23,14 @@ CREATE TABLE recipe(
     PRIMARY KEY (id)
 );
 
+DROP TABLE IF EXISTS ingredient;
 CREATE TABLE ingredient(
     id INTEGER AUTO_INCREMENT,
     name VARCHAR(20) UNIQUE,
     PRIMARY KEY (id)
 );
 
+DROP TABLE IF EXISTS recipe_book;
 CREATE TABLE recipe_book(
     user_id INTEGER,
     recipe_id INTEGER,
@@ -50,8 +53,7 @@ INSERT INTO recipe values (1, 'Pancakes', "Pour milk, whisk eggs.. blah blah", 1
 INSERT INTO recipe values (2, 'Waffles', "Mix all the stuffs together and pray", 3, '2023-10-04', 20, "/resources/photos/waffles.jpg");
 INSERT INTO recipe values (3, 'Milky Milk', "If you milk the milk you will have it all milked", 1, '2023-10-04', 30, "/resources/photos/waffles.jpg");
 
-INSERT INTO recipe_book values (1, 1, 1);
-INSERT INTO recipe_book values (2, 1, 2);
-INSERT INTO recipe_book values (3, 2, 1);
-INSERT INTO recipe_book values (4, 3, 2);
+INSERT INTO recipe_book values (1, 1);
+INSERT INTO recipe_book values (2, 1);
+INSERT INTO recipe_book values (3, 2);
 
