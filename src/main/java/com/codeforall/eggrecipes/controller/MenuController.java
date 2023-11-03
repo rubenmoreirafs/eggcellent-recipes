@@ -1,25 +1,24 @@
 package com.codeforall.eggrecipes.controller;
 
-import com.codeforall.eggrecipes.model.Recipe;
 import com.codeforall.eggrecipes.model.User;
-import com.codeforall.eggrecipes.service.RecipeService;
-import com.codeforall.eggrecipes.service.UserService;
+import com.codeforall.eggrecipes.service.RecipeServiceImpl;
+import com.codeforall.eggrecipes.service.UserServiceImpl;
 import view.MenuView;
 
 public class MenuController {
     private MenuView menuView;
-    private UserService userService;
+    private UserServiceImpl userService;
 
-    private RecipeService recipeService;
+    private RecipeServiceImpl recipeService;
     public void createRecipe(int userId, int recipeId) {
         recipeService.createRecipe(userId, recipeId);
     }
 
-    public void setRecipeService(RecipeService recipeService) {
+    public void setRecipeService(RecipeServiceImpl recipeService) {
         this.recipeService = recipeService;
     }
 
-    public RecipeService getRecipeService() {
+    public RecipeServiceImpl getRecipeService() {
         return recipeService;
     }
 
@@ -28,12 +27,12 @@ public class MenuController {
     }
 
 
-    public void setUserService(UserService userService) {
+    public void setUserService(UserServiceImpl userService) {
         this.userService = userService;
     }
 
     public User getNameById(int id) {
-        return userService.getUserById(id);
+        return userService.get(id);
     }
 
 

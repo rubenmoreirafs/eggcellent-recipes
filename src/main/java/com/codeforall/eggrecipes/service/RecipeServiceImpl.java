@@ -7,10 +7,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
-public class RecipeService {
+public class RecipeServiceImpl {
     EntityManagerFactory entityManagerFactory;
 
-    public RecipeService(EntityManagerFactory entityManagerFactory) {
+    public RecipeServiceImpl(EntityManagerFactory entityManagerFactory) {
         this.entityManagerFactory = entityManagerFactory;
     }
 

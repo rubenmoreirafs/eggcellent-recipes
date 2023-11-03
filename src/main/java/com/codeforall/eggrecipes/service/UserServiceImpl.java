@@ -5,18 +5,17 @@ import com.codeforall.eggrecipes.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.transaction.Transactional;
 import java.util.Set;
 
-public class UserService {
+public class UserServiceImpl implements UserService {
     EntityManagerFactory entityManagerFactory;
 
-    public UserService(EntityManagerFactory entityManagerFactory) {
+    public UserServiceImpl(EntityManagerFactory entityManagerFactory) {
         this.entityManagerFactory = entityManagerFactory;
     }
 
-    public User getUserById(int id) {
+    @Override
+    public User get(int id) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         User user;
 
@@ -31,4 +30,18 @@ public class UserService {
         return user;
     }
 
+    @Override
+    public Set<Recipe> getRecipeBook(int id) {
+        return null;
+    }
+
+    @Override
+    public User SaveOrUpdate(User user) {
+        return null;
+    }
+
+    @Override
+    public void Delete(int id) {
+
+    }
 }
