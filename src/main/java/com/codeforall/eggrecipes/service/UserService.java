@@ -11,8 +11,8 @@ public interface UserService {
 
     public Set<Recipe> getRecipeBook(int id);
 
-    public User SaveOrUpdate(User user);
+    public User saveOrUpdate(User user);
 
-    public void Delete(int id);
+    public void delete(int id);
 
 }

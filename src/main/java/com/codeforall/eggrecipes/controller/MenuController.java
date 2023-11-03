@@ -11,7 +11,7 @@ public class MenuController {
 
     private RecipeServiceImpl recipeService;
     public void createRecipe(int userId, int recipeId) {
-        recipeService.createRecipe(userId, recipeId);
+        recipeService.saveOrUpdate(userId, recipeId);
     }
 
     public void setRecipeService(RecipeServiceImpl recipeService) {

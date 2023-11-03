@@ -36,12 +36,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User SaveOrUpdate(User user) {
+    public User saveOrUpdate(User user) {
         return null;
     }
 
     @Override
-    public void Delete(int id) {
+    public void delete(int id) {
 
     }
 }
