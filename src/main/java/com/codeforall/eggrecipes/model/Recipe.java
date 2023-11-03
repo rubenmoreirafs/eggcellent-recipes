@@ -11,9 +11,13 @@ public class Recipe {
     private int id;
     @ManyToMany(mappedBy = "recipeBook")
     private Set<User> userList = new HashSet<>();
-    /*@OneToMany
+    @OneToMany(
+            cascade = {CascadeType.ALL},
+            orphanRemoval = true,
+            mappedBy = "recipe"
+    )
     private List<Ingredient> ingredientList = new ArrayList<>();
-     */
+
     private String name;
     private String instructions;
     @Column(name = "owner_id")
@@ -47,19 +51,15 @@ public class Recipe {
         return name;
     }
 
-    /*
     public List<Ingredient> getIngredientList() {
         return ingredientList;
     }
 
-     */
 
-    /*
     public void setIngredientList(List<Ingredient> ingredientList) {
         this.ingredientList = ingredientList;
     }
 
-     */
 
     public void setName(String name) {
         this.name = name;

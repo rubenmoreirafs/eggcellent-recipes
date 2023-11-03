@@ -11,8 +11,19 @@ public class Ingredient {
     private int id;
     private String name;
 
+    @ManyToOne
+    private Recipe recipe;
+
     public int getId() {
         return id;
+    }
+
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
     }
 
     public void setId(int id) {
