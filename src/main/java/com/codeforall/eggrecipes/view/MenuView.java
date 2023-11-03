@@ -18,7 +18,7 @@ public class MenuView {
         recipe.setInstructions("Milk the milk and it will all be milked");
         recipe.setOwnerId(2);
         User user = menuController.getNameById(2);
-        menuController.createRecipe(2, 3);
+        menuController.createRecipe(3, 3);
         System.out.println(user.getUsername());
 
         System.out.println("Bye!");
