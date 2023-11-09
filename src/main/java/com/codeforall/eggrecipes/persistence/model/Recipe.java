@@ -1,4 +1,4 @@
-package com.codeforall.eggrecipes.model;
+package com.codeforall.eggrecipes.persistence.model;
 
 import javax.persistence.*;
 import java.util.*;
@@ -30,6 +30,12 @@ public class Recipe {
 
     @Column(name = "photo_url")
     private String photoUrl;
+
+
+    public Ingredient addIngredient(Ingredient ingredient) {
+        ingredientList.add(ingredient);
+        return ingredient;
+    }
 
     public Set<User> getUserList() {
         return userList;

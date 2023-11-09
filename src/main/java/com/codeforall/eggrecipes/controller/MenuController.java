@@ -1,6 +1,7 @@
 package com.codeforall.eggrecipes.controller;
 
-import com.codeforall.eggrecipes.model.User;
+import com.codeforall.eggrecipes.persistence.model.Recipe;
+import com.codeforall.eggrecipes.persistence.model.User;
 import com.codeforall.eggrecipes.service.RecipeServiceImpl;
 import com.codeforall.eggrecipes.service.UserServiceImpl;
 import view.MenuView;
@@ -10,10 +11,21 @@ public class MenuController {
     private UserServiceImpl userService;
 
     private RecipeServiceImpl recipeService;
-    public void createRecipe(int userId, int recipeId) {
-        recipeService.saveOrUpdate(userId, recipeId);
+    public void addRecipeToUser(int userId, int recipeId) {
+        userService.addRecipe(userId, recipeId);
     }
 
+    public void createRecipe(Recipe recipe) {
+        recipeService.saveOrUpdate(recipe);
+    }
+
+    public void deleteRecipe(int userId, int recipeId) {
+        userService.deleteRecipe(userId, recipeId);
+    }
+
+    public void addIngredient(int recipeId, int ingredientId) {
+        recipeService.addIngredient(recipeId,ingredientId);
+    }
     public void setRecipeService(RecipeServiceImpl recipeService) {
         this.recipeService = recipeService;
     }

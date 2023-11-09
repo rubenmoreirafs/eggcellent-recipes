@@ -1,4 +1,4 @@
-package com.codeforall.eggrecipes.model;
+package com.codeforall.eggrecipes.persistence.model;
 
 
 import javax.persistence.*;
@@ -9,14 +9,11 @@ public class Ingredient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String name;
 
     @ManyToOne
     private Recipe recipe;
-
-    public int getId() {
-        return id;
-    }
 
     public Recipe getRecipe() {
         return recipe;
@@ -26,10 +23,6 @@ public class Ingredient {
         this.recipe = recipe;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
@@ -37,4 +30,13 @@ public class Ingredient {
     public void setName(String name) {
         this.name = name;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 }

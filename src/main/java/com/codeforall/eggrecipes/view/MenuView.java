@@ -1,8 +1,9 @@
 package view;
 
 import com.codeforall.eggrecipes.controller.MenuController;
-import com.codeforall.eggrecipes.model.Recipe;
-import com.codeforall.eggrecipes.model.User;
+import com.codeforall.eggrecipes.persistence.model.Ingredient;
+import com.codeforall.eggrecipes.persistence.model.Recipe;
+import com.codeforall.eggrecipes.persistence.model.User;
 
 public class MenuView {
     private MenuController menuController;
@@ -18,7 +19,15 @@ public class MenuView {
         recipe.setInstructions("Milk the milk and it will all be milked");
         recipe.setOwnerId(2);
         User user = menuController.getNameById(2);
-        menuController.createRecipe(3, 3);
+        //menuController.createRecipe(recipe);
+        Ingredient ingredient = new Ingredient();
+        ingredient.setName("eggy egg");
+        ingredient.setRecipe(recipe);
+        menuController.addIngredient(3, ingredient.getId());
+
+        //menuController.addRecipe(3, 3);
+        //menuController.deleteRecipe(3, 2);
+
         System.out.println(user.getUsername());
 
         System.out.println("Bye!");

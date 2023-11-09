@@ -1,9 +1,7 @@
-package com.codeforall.eggrecipes.model;
+package com.codeforall.eggrecipes.persistence.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -13,7 +11,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToMany
+    @ManyToMany(
+        cascade = {CascadeType.ALL},
+        fetch = FetchType.EAGER
+    )
     @JoinTable(
             name = "recipe_book",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -26,6 +27,10 @@ public class User {
     private String email;
 
 
+    public Recipe removeRecipe(Recipe recipe) {
+        recipeBook.remove(recipe);
+        return recipe;
+    }
     public Set<Recipe> getRecipeBook() {
         return recipeBook;
     }

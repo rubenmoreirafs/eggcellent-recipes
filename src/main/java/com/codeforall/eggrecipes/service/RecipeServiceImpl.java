@@ -1,8 +1,7 @@
 package com.codeforall.eggrecipes.service;
 
-import com.codeforall.eggrecipes.model.Ingredient;
-import com.codeforall.eggrecipes.model.Recipe;
-import com.codeforall.eggrecipes.model.User;
+import com.codeforall.eggrecipes.persistence.model.Ingredient;
+import com.codeforall.eggrecipes.persistence.model.Recipe;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -27,16 +26,12 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public Recipe saveOrUpdate(int userId, int recipeId) {
+    public Recipe saveOrUpdate(Recipe recipe) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        User user;
-        Recipe recipe;
         try {
-            user = entityManager.find(User.class, userId);
-            recipe = entityManager.find(Recipe.class, recipeId);
             EntityTransaction tx = entityManager.getTransaction();
             tx.begin();
-            user.getRecipeBook().add(recipe);
+            entityManager.merge(recipe);
             tx.commit();
         } finally {
             if (entityManager != null) {
@@ -45,9 +40,26 @@ public class RecipeServiceImpl implements RecipeService {
         }
         return recipe;
     }
+    @Override
+    public void addIngredientToRecipe(int recipeId, int ingredientId) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            Recipe recipe = entityManager.find(Recipe.class, recipeId);
+            Ingredient ingredient = entityManager.find(Ingredient.class, ingredientId);
+            EntityTransaction tx = entityManager.getTransaction();
+            tx.begin();
+            recipe.addIngredient(ingredient);
+            entityManager.merge(recipe);
+            tx.commit();
+        } finally {
+             if(entityManager != null) {
+                 entityManager.close();
+             }
+        }
+    }
 
     @Override
-    public void delete(int id) {
+    public void deleteIngredient(int recipeId, int ingredientId) {
 
     }
 }

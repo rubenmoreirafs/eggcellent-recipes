@@ -1,7 +1,7 @@
 package com.codeforall.eggrecipes.service;
 
-import com.codeforall.eggrecipes.model.Recipe;
-import com.codeforall.eggrecipes.model.User;
+import com.codeforall.eggrecipes.persistence.model.Recipe;
+import com.codeforall.eggrecipes.persistence.model.User;
 
 import java.util.Set;
 
@@ -14,5 +14,7 @@ public interface UserService {
     public User saveOrUpdate(User user);
 
     public void delete(int id);
+
+
 
 }
