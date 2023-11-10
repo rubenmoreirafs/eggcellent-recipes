@@ -11,10 +11,17 @@ public class MenuController {
     private UserServiceImpl userService;
 
     private RecipeServiceImpl recipeService;
+
+    public void createUser(User user) {
+        userService.saveOrUpdate(user);
+    }
     public void addRecipeToUser(int userId, int recipeId) {
         userService.addRecipe(userId, recipeId);
     }
 
+    public void deleteUser(int userId) {
+        userService.delete(userId);
+    }
     public void createRecipe(Recipe recipe) {
         recipeService.saveOrUpdate(recipe);
     }

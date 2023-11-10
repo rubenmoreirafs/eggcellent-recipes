@@ -21,22 +21,16 @@ public class MenuView {
 
     public void show() {
         System.out.println("hello!");
-        Recipe recipe = new Recipe();
-        recipe.setName("Milky Milk");
-        recipe.setInstructions("Milk the milk and it will all be milked");
-        recipe.setOwnerId(2);
-        recipe.setPrivate(false);
 
-        Ingredient ingredient = new Ingredient();
+        menuController.deleteUser(4);
 
-        recipe.addIngredient(ingredient);
-
-        menuController.createRecipe(recipe);
         //create user
+      //works  menuController.createUser(user);
         //delete user
         //get user
 
         //create recipe
+       //only works if private is true menuController.createRecipe(recipe);
         //edit recipe
         //delete recipe
         //add recipe to recipebook
@@ -49,9 +43,9 @@ public class MenuView {
 
 
 
-        User user = menuController.getNameById(2);
+        User user1 = menuController.getNameById(2);
 
-        System.out.println(user.getUsername());
+        System.out.println(user1.getUsername());
 
         System.out.println("Bye!");
     }
