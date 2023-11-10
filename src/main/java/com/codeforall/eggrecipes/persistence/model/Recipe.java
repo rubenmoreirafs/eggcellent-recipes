@@ -19,6 +19,9 @@ public class Recipe {
     private List<Ingredient> ingredientList = new ArrayList<>();
 
     private String name;
+
+    @Column(name = "is_private")
+    private boolean isPrivate;
     private String instructions;
     @Column(name = "owner_id")
     private int ownerId;
@@ -35,6 +38,10 @@ public class Recipe {
     public Ingredient addIngredient(Ingredient ingredient) {
         ingredientList.add(ingredient);
         return ingredient;
+    }
+
+    public void removeIngredient(Ingredient ingredient) {
+        ingredientList.remove(ingredient);
     }
 
     public Set<User> getUserList() {
@@ -56,6 +63,11 @@ public class Recipe {
     public String getName() {
         return name;
     }
+
+    public boolean isPrivate() {
+        return isPrivate;
+    }
+
 
     public List<Ingredient> getIngredientList() {
         return ingredientList;
@@ -109,5 +121,9 @@ public class Recipe {
 
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
+    }
+
+    public void setPrivate(boolean aPrivate) {
+        isPrivate = aPrivate;
     }
 }

@@ -6,6 +6,9 @@ import com.codeforall.eggrecipes.persistence.model.User;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.util.Optional;
 import java.util.Set;
 
 public class UserServiceImpl implements UserService {
@@ -18,27 +21,46 @@ public class UserServiceImpl implements UserService {
     @Override
     public User get(int id) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        User user;
 
         try {
-            user = entityManager.find(User.class, id);
+			return entityManager.find(User.class, id);
         } finally {
             if (entityManager != null) {
                 entityManager.close();
             }
         }
-
-        return user;
     }
 
+
     @Override
-    public Set<Recipe> getRecipeBook(int id) {
-        return null;
+    public Set<Recipe> getRecipes(int id) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            User user = Optional.ofNullable(entityManager.find(User.class, id))
+                    .orElseThrow(() -> new IllegalArgumentException("User does not exist"));
+
+            return user.getRecipeBook();
+        } finally {
+            if (entityManager != null) {
+                entityManager.close();
+            }
+        }
     }
 
     @Override
     public User saveOrUpdate(User user) {
-        return null;
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            EntityTransaction tx = entityManager.getTransaction();
+            tx.begin();
+            entityManager.merge(user);
+            tx.commit();
+        } finally {
+            if(entityManager != null) {
+                entityManager.close();
+            }
+        }
+        return user;
     }
 
     public Recipe addRecipe(int userId, int recipeId) {
@@ -61,7 +83,18 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public void delete(int id) {
-        return;
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            User user = entityManager.find(User.class, id);
+            EntityTransaction tx = entityManager.getTransaction();
+            tx.begin();
+            entityManager.remove(user);
+            tx.commit();
+        } finally {
+            if(entityManager != null) {
+                entityManager.close();
+            }
+        }
     }
 
     public void deleteRecipe(int userId, int recipeID) {
@@ -80,7 +113,4 @@ public class UserServiceImpl implements UserService {
             }
         }
     }
-
-
-
 }

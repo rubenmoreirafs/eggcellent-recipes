@@ -9,7 +9,7 @@ public interface UserService {
 
     public User get(int id);
 
-    public Set<Recipe> getRecipeBook(int id);
+    public Set<Recipe> getRecipes(int id);
 
     public User saveOrUpdate(User user);
 

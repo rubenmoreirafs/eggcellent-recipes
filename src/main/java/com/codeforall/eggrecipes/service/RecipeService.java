@@ -17,7 +17,6 @@ public interface RecipeService {
 
     public void deleteIngredient(int recipeId, int ingredientId);
 
-    public void delete(int id);
 
 
 

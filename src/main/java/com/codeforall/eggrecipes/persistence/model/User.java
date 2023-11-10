@@ -11,10 +11,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToMany(
-        cascade = {CascadeType.ALL},
-        fetch = FetchType.EAGER
-    )
+    @ManyToMany
     @JoinTable(
             name = "recipe_book",
             joinColumns = @JoinColumn(name = "user_id"),
