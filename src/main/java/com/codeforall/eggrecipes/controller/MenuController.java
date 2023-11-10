@@ -24,7 +24,7 @@ public class MenuController {
     }
 
     public void addIngredient(int recipeId, int ingredientId) {
-        recipeService.addIngredient(recipeId,ingredientId);
+        recipeService.addIngredientToRecipe(recipeId,ingredientId);
     }
     public void setRecipeService(RecipeServiceImpl recipeService) {
         this.recipeService = recipeService;

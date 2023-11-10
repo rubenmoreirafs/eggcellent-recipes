@@ -23,10 +23,10 @@ public class MenuView {
         Ingredient ingredient = new Ingredient();
         ingredient.setName("eggy egg");
         ingredient.setRecipe(recipe);
-        menuController.addIngredient(3, ingredient.getId());
+        //menuController.addIngredient(3, ingredient.getId());
 
         //menuController.addRecipe(3, 3);
-        //menuController.deleteRecipe(3, 2);
+        menuController.deleteRecipe(2, 5);
 
         System.out.println(user.getUsername());
 
