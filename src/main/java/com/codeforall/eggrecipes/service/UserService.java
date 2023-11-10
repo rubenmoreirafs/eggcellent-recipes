@@ -15,6 +15,8 @@ public interface UserService {
 
     public void delete(int id);
 
+    public void deleteRecipe(int userId, int recipeId);
+
 
 
 }
