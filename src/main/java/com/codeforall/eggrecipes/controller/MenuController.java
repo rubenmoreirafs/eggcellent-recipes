@@ -19,6 +19,10 @@ public class MenuController {
         userService.addRecipe(userId, recipeId);
     }
 
+    public void removeRecipe(int userId, int recipeId) {
+        userService.deleteRecipe(userId, recipeId);
+    }
+
     public void deleteUser(int userId) {
         userService.delete(userId);
     }

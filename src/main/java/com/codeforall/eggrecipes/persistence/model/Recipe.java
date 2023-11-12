@@ -20,8 +20,10 @@ public class Recipe {
 
     private String name;
 
-    @Column(name = "is_private")
-    private boolean isPrivate;
+    @Column(
+            name = "is_private"
+    )
+    private Boolean isPrivate;
     private String instructions;
     @Column(name = "owner_id")
     private int ownerId;
@@ -64,7 +66,7 @@ public class Recipe {
         return name;
     }
 
-    public boolean isPrivate() {
+    public Boolean isPrivate() {
         return isPrivate;
     }
 

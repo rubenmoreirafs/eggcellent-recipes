@@ -47,7 +47,7 @@ INSERT INTO user values (1, 'ruben', 'ruben', 'rubenfnmoreira@gmail.com');
 INSERT INTO user values (2, 'joão', 'joão', 'joaomendanha@gmail.com');
 INSERT INTO user values (3, 'leith', 'leith', 'leithatia@gmail.com');
 
-INSERT INTO recipe values (1, 'Pancakes',1, "Pour milk, whisk eggs.. blah blah", 1, '2023-10-04', 15, "/resources/photos/pancake.jpg");
+INSERT INTO recipe values (1, 'Pancakes',0, "Pour milk, whisk eggs.. blah blah", 1, '2023-10-04', 15, "/resources/photos/pancake.jpg");
 INSERT INTO recipe values (2, 'Waffles', 1,"Mix all the stuffs together and pray", 3, '2023-10-04', 20, "/resources/photos/waffles.jpg");
 
 INSERT INTO ingredient values ( 1, 1, 'milk');

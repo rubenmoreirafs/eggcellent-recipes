@@ -24,12 +24,12 @@ public class User {
     private String email;
 
 
+    public Set<Recipe> getRecipeBook() {
+        return recipeBook;
+    }
     public Recipe removeRecipe(Recipe recipe) {
         recipeBook.remove(recipe);
         return recipe;
-    }
-    public Set<Recipe> getRecipeBook() {
-        return recipeBook;
     }
 
     public void setRecipeBook(Set<Recipe> recipeBook) {

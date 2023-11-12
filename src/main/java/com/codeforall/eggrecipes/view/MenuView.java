@@ -22,17 +22,29 @@ public class MenuView {
     public void show() {
         System.out.println("hello!");
 
-        menuController.deleteUser(4);
+        Recipe recipe = new Recipe();
+        recipe.setOwnerId(2);
+        recipe.setName("Milky milk");
+        recipe.setInstructions("milk the milk to the get to the milky god of milk");
+        recipe.setPrivate(false);
+
 
         //create user
-      //works  menuController.createUser(user);
+        //works  menuController.createUser(user);
+
         //delete user
+
         //get user
 
         //create recipe
-       //only works if private is true menuController.createRecipe(recipe);
+        //menuController.createRecipe(recipe);
+
         //edit recipe
+
         //delete recipe
+        //works menuController.removeRecipe(2,5);
+
+
         //add recipe to recipebook
         //remove book from recipebook
         //list all recipes

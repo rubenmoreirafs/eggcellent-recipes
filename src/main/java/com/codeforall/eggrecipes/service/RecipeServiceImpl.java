@@ -48,10 +48,6 @@ public class RecipeServiceImpl implements RecipeService {
     public Recipe saveOrUpdate(Recipe recipe) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         try {
-            if(!recipe.isPrivate()) {
-                System.out.println("Recipe cannot be edited");
-                return recipe;
-            }
             EntityTransaction tx = entityManager.getTransaction();
             tx.begin();
             entityManager.merge(recipe);
