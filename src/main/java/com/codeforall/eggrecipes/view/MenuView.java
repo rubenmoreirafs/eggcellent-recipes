@@ -28,28 +28,27 @@ public class MenuView {
         recipe.setInstructions("milk the milk to the get to the milky god of milk");
         recipe.setPrivate(false);
 
+        //works create user
 
-        //create user
-        //works  menuController.createUser(user);
+        // works delete user
 
-        //delete user
+        // works get user
 
-        //get user
+        // works create recipe
 
-        //create recipe
-        //menuController.createRecipe(recipe);
+        //works edit recipe
 
-        //edit recipe
-
-        //delete recipe
-        //works menuController.removeRecipe(2,5);
+        // works delete recipe
 
 
-        //add recipe to recipebook
-        //remove book from recipebook
+        // works add recipe to recipebook
+
+        // works remove book from recipebook
+
         //list all recipes
 
         //create ingredient
+
         //delete ingredient
 
 
