@@ -12,9 +12,13 @@ public class MenuController {
 
     private RecipeServiceImpl recipeService;
 
+    public User getNameById(int id) {
+        return userService.get(id);
+    }
     public void createUser(User user) {
         userService.saveOrUpdate(user);
     }
+
     public void addRecipeToUser(int userId, int recipeId) {
         userService.addRecipe(userId, recipeId);
     }
@@ -22,10 +26,10 @@ public class MenuController {
     public void removeRecipe(int userId, int recipeId) {
         userService.deleteRecipe(userId, recipeId);
     }
-
     public void deleteUser(int userId) {
         userService.delete(userId);
     }
+
     public void createRecipe(Recipe recipe) {
         recipeService.saveOrUpdate(recipe);
     }
@@ -33,10 +37,10 @@ public class MenuController {
     public void deleteRecipe(int userId, int recipeId) {
         userService.deleteRecipe(userId, recipeId);
     }
-
     public void addIngredient(int recipeId, int ingredientId) {
         recipeService.addIngredientToRecipe(recipeId,ingredientId);
     }
+
     public void setRecipeService(RecipeServiceImpl recipeService) {
         this.recipeService = recipeService;
     }
@@ -52,10 +56,6 @@ public class MenuController {
 
     public void setUserService(UserServiceImpl userService) {
         this.userService = userService;
-    }
-
-    public User getNameById(int id) {
-        return userService.get(id);
     }
 
 
