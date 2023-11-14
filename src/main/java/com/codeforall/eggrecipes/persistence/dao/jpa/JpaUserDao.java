@@ -85,10 +85,15 @@ public class JpaUserDao implements UserDao {
 	@Override
 	public List<Recipe> getAllPrivateRecipes(Integer userId) {
 		EntityManager em = emF.createEntityManager();
+
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Recipe> criteriaQuery = cb.createQuery(Recipe.class);
 		Root<Recipe> root = criteriaQuery.from(Recipe.class);
-		criteriaQuery.where(cb.and(cb.equal(root.get("isPrivate"), 0),(cb.equal(root.get("ownerId"), userId))));
+
+		criteriaQuery.where(cb.and(
+				cb.equal(root.get("isPrivate"), 0),
+				(cb.equal(root.get("ownerId"), userId))));
+
 		TypedQuery<Recipe> qry = em.createQuery(criteriaQuery);
 
 		return qry.getResultList();
@@ -99,10 +104,15 @@ public class JpaUserDao implements UserDao {
 	@Override
 	public List<Recipe> getAllPublicRecipes(Integer userId) {
 		EntityManager em = emF.createEntityManager();
+
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Recipe> criteriaQuery = cb.createQuery(Recipe.class);
 		Root<Recipe> root = criteriaQuery.from(Recipe.class);
-		criteriaQuery.where(cb.and(cb.equal(root.get("isPrivate"), 1),( cb.equal(root.get("ownerId"), userId))));
+
+		criteriaQuery.where(cb.and(
+				cb.equal(root.get("isPrivate"), 1),
+				( cb.equal(root.get("ownerId"), userId))));
+
 		TypedQuery<Recipe> qry = em.createQuery(criteriaQuery);
 
 		return qry.getResultList();

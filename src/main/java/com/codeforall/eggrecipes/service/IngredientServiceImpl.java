@@ -19,7 +19,7 @@ public class IngredientServiceImpl implements IngredientService {
 
 	@Override
 	public Ingredient saveOrUpdate(Ingredient ingredient) {
-		return saveOrUpdate(ingredient);
+		return ingredientDao.saveOrUpdate(ingredient);
 	}
 
 	public IngredientDao getIngredientDao() {
