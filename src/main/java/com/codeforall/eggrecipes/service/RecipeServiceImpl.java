@@ -1,5 +1,6 @@
 package com.codeforall.eggrecipes.service;
 
+import com.codeforall.eggrecipes.persistence.dao.RecipeDao;
 import com.codeforall.eggrecipes.persistence.model.Ingredient;
 import com.codeforall.eggrecipes.persistence.model.Recipe;
 import com.codeforall.eggrecipes.persistence.model.User;
@@ -11,94 +12,48 @@ import java.util.List;
 import java.util.Optional;
 
 public class RecipeServiceImpl implements RecipeService {
-    EntityManagerFactory entityManagerFactory;
 
-    public RecipeServiceImpl(EntityManagerFactory entityManagerFactory) {
-        this.entityManagerFactory = entityManagerFactory;
-    }
+    private RecipeDao recipeDao;
+
+
+
 
     @Override
     public Recipe get(int id) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        try {
-            return entityManager.find(Recipe.class, id);
-        } finally {
-            if (entityManager != null) {
-                entityManager.close();
-            }
-        }
+        return recipeDao.findById(id);
+    }
+
+    @Override
+    public List<Recipe> findAll() {
+        return recipeDao.findAll();
     }
 
     @Override
     public List<Ingredient> getIngredientList(int id) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        try {
-            Recipe recipe = Optional.ofNullable(entityManager.find(Recipe.class, id))
-                    .orElseThrow(() -> new IllegalArgumentException("Recipe doesn't exist"));
-
-            return recipe.getIngredientList();
-        } finally {
-            if (entityManager != null) {
-                entityManager.close();
-            }
-        }
+        return recipeDao.getIngredientList(id);
     }
 
     @Override
     public Recipe saveOrUpdate(Recipe recipe) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        try {
-            if(!recipe.isPrivate()) {
-                System.out.println("Recipe cannot be edited");
-                return recipe;
-            }
-            EntityTransaction tx = entityManager.getTransaction();
-            tx.begin();
-            entityManager.merge(recipe);
-            tx.commit();
-        } finally {
-            if (entityManager != null) {
-                entityManager.close();
-            }
-        }
-        return recipe;
+        return recipeDao.saveOrUpdate(recipe);
     }
+
     @Override
-    public void addIngredientToRecipe(int recipeId, int ingredientId) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        try {
-            Recipe recipe = entityManager.find(Recipe.class, recipeId);
-            Ingredient ingredient = entityManager.find(Ingredient.class, ingredientId);
-            EntityTransaction tx = entityManager.getTransaction();
-            tx.begin();
-            recipe.addIngredient(ingredient);
-            entityManager.merge(recipe);
-            tx.commit();
-        } finally {
-             if(entityManager != null) {
-                 entityManager.close();
-             }
-        }
+    public void saveOrUpdateIngredientToRecipe(int recipeId, int ingredientId) {
+        recipeDao.saveOrUpdateIngredientToRecipe(recipeId, ingredientId);
     }
 
     @Override
     public void deleteIngredient(int recipeId, int ingredientId) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        recipeDao.deleteIngredient(recipeId, ingredientId);
+    }
 
-        try {
-            Recipe recipe =  entityManager.find(Recipe.class, recipeId);
-            Ingredient ingredient = entityManager.find(Ingredient.class, ingredientId);
-            EntityTransaction tx = entityManager.getTransaction();
-            tx.begin();
-            recipe.removeIngredient(ingredient);
-            entityManager.merge(ingredient);
-            tx.commit();
+    public RecipeDao getRecipeDao() {
+        return recipeDao;
+    }
 
-        } finally {
-            if(entityManager != null) {
-                entityManager.close();
-            }
-        }
+    public void setRecipeDao(RecipeDao recipeDao) {
+        this.recipeDao = recipeDao;
     }
 }
 

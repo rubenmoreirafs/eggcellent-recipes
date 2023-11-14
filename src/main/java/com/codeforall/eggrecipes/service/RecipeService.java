@@ -7,15 +7,17 @@ import java.util.List;
 
 public interface RecipeService {
 
-    public Recipe get(int id);
+    Recipe get(int id);
 
-    public List<Ingredient> getIngredientList(int id);
+    List<Recipe> findAll();
 
-    public Recipe saveOrUpdate(Recipe recipe);
 
-    public void addIngredientToRecipe(int recipeId, int ingredientId);
+    List<Ingredient> getIngredientList(int id);
 
-    public void deleteIngredient(int recipeId, int ingredientId);
+    Recipe saveOrUpdate(Recipe recipe);
+
+    void saveOrUpdateIngredientToRecipe(int recipeId, int ingredientId);
+    void deleteIngredient(int recipeId, int ingredientId);
 
 
 
