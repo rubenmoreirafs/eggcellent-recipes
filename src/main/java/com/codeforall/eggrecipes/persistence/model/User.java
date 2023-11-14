@@ -6,11 +6,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "user")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
+public class User extends AbstractModel {
     @ManyToMany
     @JoinTable(
             name = "recipe_book",
@@ -36,13 +32,6 @@ public class User {
         this.recipeBook = recipeBook;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;

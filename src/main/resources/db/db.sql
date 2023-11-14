@@ -15,7 +15,7 @@ DROP TABLE IF EXISTS recipe;
 CREATE TABLE recipe(
     id INTEGER AUTO_INCREMENT,
     name VARCHAR(20) NOT NULL,
-    is_private TINYINT,
+    is_private BOOL,
     instructions TEXT NOT NULL,
     owner_id INTEGER  NOT NULL,
     creation_date DATE,

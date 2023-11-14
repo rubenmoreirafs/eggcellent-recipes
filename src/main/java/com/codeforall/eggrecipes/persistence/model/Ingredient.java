@@ -5,13 +5,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "ingredient")
-public class Ingredient {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Ingredient extends AbstractModel {
 
     private String name;
-
     @ManyToOne
     private Recipe recipe;
 
@@ -31,12 +27,5 @@ public class Ingredient {
         this.name = name;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
 }

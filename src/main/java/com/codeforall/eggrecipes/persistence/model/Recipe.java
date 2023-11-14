@@ -5,10 +5,8 @@ import java.util.*;
 
 @Entity
 @Table(name = "recipe")
-public class Recipe {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Recipe extends AbstractModel{
+
     @ManyToMany(mappedBy = "recipeBook")
     private Set<User> userList = new HashSet<>();
     @OneToMany(
@@ -52,14 +50,6 @@ public class Recipe {
 
     public void setUserList(Set<User> userList) {
         this.userList = userList;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {

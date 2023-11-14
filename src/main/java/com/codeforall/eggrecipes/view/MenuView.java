@@ -4,16 +4,10 @@ import com.codeforall.eggrecipes.controller.MenuController;
 import com.codeforall.eggrecipes.persistence.model.Ingredient;
 import com.codeforall.eggrecipes.persistence.model.Recipe;
 import com.codeforall.eggrecipes.persistence.model.User;
-import com.codeforall.eggrecipes.service.IngredientServiceImpl;
-import com.codeforall.eggrecipes.service.RecipeServiceImpl;
-import com.codeforall.eggrecipes.service.UserServiceImpl;
+import com.codeforall.eggrecipes.service.*;
 
 public class MenuView {
     private MenuController menuController;
-
-    private UserServiceImpl userService;
-    private RecipeServiceImpl recipeService;
-    private IngredientServiceImpl ingredientService;
 
     public void setMenuController(MenuController menuController) {
         this.menuController = menuController;
@@ -22,12 +16,14 @@ public class MenuView {
     public void show() {
         System.out.println("hello!");
 
-        Recipe recipe = new Recipe();
-        recipe.setOwnerId(2);
-        recipe.setName("Milky milk");
-        recipe.setInstructions("milk the milk to the get to the milky god of milk");
-        recipe.setPrivate(false);
 
+        for(Recipe recipe: menuController.getAllRecipes()) {
+            System.out.println(recipe.getName());
+        }
+
+        for(Recipe recipe: menuController.getAllPrivateRecipes(1)) {
+            System.out.println(recipe.getName());
+        }
         //works create user
 
         // works delete user
