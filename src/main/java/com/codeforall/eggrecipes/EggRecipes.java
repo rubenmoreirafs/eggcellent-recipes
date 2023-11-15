@@ -1,6 +1,5 @@
 package com.codeforall.eggrecipes;
 
-import com.codeforall.eggrecipes.controller.MenuController;
 import com.codeforall.eggrecipes.persistence.JPABootstrap;
 import com.codeforall.eggrecipes.persistence.dao.IngredientDao;
 import com.codeforall.eggrecipes.persistence.dao.RecipeDao;
@@ -9,7 +8,6 @@ import com.codeforall.eggrecipes.persistence.dao.jpa.JpaIngredientDao;
 import com.codeforall.eggrecipes.persistence.dao.jpa.JpaRecipeDao;
 import com.codeforall.eggrecipes.persistence.dao.jpa.JpaUserDao;
 import com.codeforall.eggrecipes.service.*;
-import view.MenuView;
 
 import javax.persistence.EntityManagerFactory;
 
