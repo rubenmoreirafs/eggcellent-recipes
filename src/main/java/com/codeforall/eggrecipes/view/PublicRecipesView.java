@@ -1,6 +1,8 @@
 package com.codeforall.eggrecipes.view;
 
-import com.codeforall.eggrecipes.model.Recipe;
+
+import com.codeforall.eggrecipes.controller.RecipeController;
+import com.codeforall.eggrecipes.persistence.model.Recipe;
 
 import java.util.List;
 import java.util.Set;
@@ -8,7 +10,7 @@ import java.util.Set;
 public class PublicRecipesView implements View {
     private RecipeController recipeController;
 
-    public void setListRecipeController(RecipeController recipeController) {
+    public void setRecipeController(RecipeController recipeController) {
         this.recipeController = recipeController;
     }
 

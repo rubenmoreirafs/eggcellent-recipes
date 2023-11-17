@@ -1,5 +1,6 @@
 package com.codeforall.eggrecipes.view;
 
+import com.codeforall.eggrecipes.controller.LoginController;
 import org.academiadecodigo.bootcamp.scanners.menu.MenuInputScanner;
 import org.academiadecodigo.bootcamp.scanners.string.PasswordInputScanner;
 import org.academiadecodigo.bootcamp.scanners.string.StringInputScanner;
@@ -14,7 +15,7 @@ public class LoginView extends AbstractView {
     }
     @Override
     public void show() {
-        if (loginController.isAuthFailed) {
+        if (loginController.isAuthFailed()) {
             System.out.println("Incorrect details entered");
         }
 

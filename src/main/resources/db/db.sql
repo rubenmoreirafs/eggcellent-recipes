@@ -15,7 +15,7 @@ DROP TABLE IF EXISTS recipe;
 CREATE TABLE recipe(
     id INTEGER AUTO_INCREMENT,
     name VARCHAR(20) NOT NULL,
-    is_private BOOL,
+    is_private BOOL DEFAULT 1,
     instructions TEXT NOT NULL,
     owner_id INTEGER  NOT NULL,
     creation_date DATE,
@@ -26,7 +26,7 @@ CREATE TABLE recipe(
 
 DROP TABLE IF EXISTS ingredient;
 CREATE TABLE ingredient(
-    id INTEGER,
+    id INTEGER AUTO_INCREMENT ,
     recipe_id INTEGER,
     name VARCHAR(20),
     PRIMARY KEY (id),
@@ -49,6 +49,7 @@ INSERT INTO user values (3, 'leith', 'leith', 'leithatia@gmail.com');
 
 INSERT INTO recipe values (1, 'Pancakes',0, "Pour milk, whisk eggs.. blah blah", 1, '2023-10-04', 15, "/resources/photos/pancake.jpg");
 INSERT INTO recipe values (2, 'Waffles', 1,"Mix all the stuffs together and pray", 3, '2023-10-04', 20, "/resources/photos/waffles.jpg");
+INSERT INTO recipe values (3, 'Milky milk', 0, 'Mix. Taste. Enjoy. Egg.', 1, '2023-10-14', 10, '/resources/photos/milkymilk.jpg');
 
 INSERT INTO ingredient values ( 1, 1, 'milk');
 INSERT INTO ingredient values (2,2, 'egg');

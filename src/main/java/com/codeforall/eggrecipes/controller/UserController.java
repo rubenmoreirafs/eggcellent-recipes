@@ -9,20 +9,23 @@ public class UserController {
 
     private UserServiceImpl userService;
 
+    public void setUserService(UserServiceImpl userService) {
+        this.userService = userService;
+    }
+
     public Set<Recipe> listRecipeBook() {
-        return userService.getRecipesInBook();
+        return userService.getRecipes(1);
     }
 
     public List<Recipe> listAllPrivate() {
-        return userService.getPrivateRecipes();
+        return userService.getAllPrivateRecipes(1);
     }
 
-    public void addToBook(int id) {
-        userService.addRecipe(id);
+    public void addToBook(int recipeId) {
+        userService.addRecipeToRecipeBook(1, recipeId);
     }
 
-    public void removeFromBook(int id) {
-        userService.deleteRecipe(id);
+    public void removeFromBook(int recipeId) {
+        userService.deleteRecipeFromBook(1, recipeId);
     }
-
 }

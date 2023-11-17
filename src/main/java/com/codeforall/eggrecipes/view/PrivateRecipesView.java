@@ -1,9 +1,9 @@
 package com.codeforall.eggrecipes.view;
 
-import com.codeforall.eggrecipes.model.Recipe;
+import com.codeforall.eggrecipes.controller.UserController;
+import com.codeforall.eggrecipes.persistence.model.Recipe;
 
 import java.util.List;
-import java.util.Set;
 
 public class PrivateRecipesView implements View {
     private UserController userController;
@@ -21,7 +21,7 @@ public class PrivateRecipesView implements View {
         List<Recipe> recipes = userController.listAllPrivate();
 
         for (Recipe recipe : recipes) {
-            System.out.println(recipe.getId() + " " + recipe.getName());
+            System.out.println(recipe.getId() + " - " + recipe.getName());
         }
     }
 }

@@ -1,6 +1,8 @@
 package com.codeforall.eggrecipes.view;
 
-import com.codeforall.eggrecipes.model.Recipe;
+
+import com.codeforall.eggrecipes.controller.UserController;
+import com.codeforall.eggrecipes.persistence.model.Recipe;
 
 import java.util.Set;
 

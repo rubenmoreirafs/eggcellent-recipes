@@ -1,9 +1,14 @@
 package com.codeforall.eggrecipes.view;
 
+import com.codeforall.eggrecipes.controller.UserController;
 import org.academiadecodigo.bootcamp.scanners.string.StringInputScanner;
 
 public class RemoveFromBookView extends AbstractView {
     private UserController userController;
+
+    public void setUserController(UserController userController) {
+        this.userController = userController;
+    }
 
     @Override
     public void show() {

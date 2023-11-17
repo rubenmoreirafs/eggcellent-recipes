@@ -1,5 +1,6 @@
 package com.codeforall.eggrecipes.service;
 
+import com.codeforall.eggrecipes.persistence.dao.IngredientDao;
 import com.codeforall.eggrecipes.persistence.dao.RecipeDao;
 import com.codeforall.eggrecipes.persistence.model.Ingredient;
 import com.codeforall.eggrecipes.persistence.model.Recipe;
@@ -14,9 +15,16 @@ import java.util.Optional;
 public class RecipeServiceImpl implements RecipeService {
 
     private RecipeDao recipeDao;
+    private IngredientDao ingredientDao;
 
 
+    public IngredientDao getIngredientDao() {
+        return ingredientDao;
+    }
 
+    public void setIngredientDao(IngredientDao ingredientDao) {
+        this.ingredientDao = ingredientDao;
+    }
 
     @Override
     public Recipe get(int id) {
@@ -25,7 +33,12 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public List<Recipe> findAll() {
-        return recipeDao.findAll();
+        return recipeDao.getAllPublicRecipes(1);
+    }
+
+    @Override
+    public List<Recipe> getAllPublicRecipes(Integer userId) {
+        return recipeDao.getAllPublicRecipes(userId);
     }
 
     @Override
@@ -39,13 +52,19 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public void saveOrUpdateIngredientToRecipe(int recipeId, int ingredientId) {
+    public void saveOrUpdateIngredientToRecipe(int recipeId, int ingredientId)  {
+
         recipeDao.saveOrUpdateIngredientToRecipe(recipeId, ingredientId);
     }
 
     @Override
     public void deleteIngredient(int recipeId, int ingredientId) {
         recipeDao.deleteIngredient(recipeId, ingredientId);
+    }
+
+    @Override
+    public void deleteRecipe(int recipeId) {
+        recipeDao.delete(recipeId);
     }
 
     public RecipeDao getRecipeDao() {

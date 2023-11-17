@@ -4,6 +4,56 @@ import com.codeforall.eggrecipes.persistence.model.Recipe;
 import com.codeforall.eggrecipes.service.UserServiceImpl;
 
 public class MainController extends AbstractController {
+    private PublicRecipeController publicRecipeController;
+    private PrivateRecipeController privateRecipeController;
+    private RecipeController recipeController;
+    private BookController bookController;
+
+    private AddToBookController addToBookController;
+    private RemoveFromBookController removeFromBookController;
+    private CreateRecipeController createRecipeController;
+    private UpdateRecipeController updateRecipeController;
+    private DeleteRecipeController deleteRecipeController;
+
+    public void setPublicRecipeController(PublicRecipeController publicRecipeController) {
+        this.publicRecipeController = publicRecipeController;
+    }
+
+    public void setPrivateRecipeController(PrivateRecipeController privateRecipeController) {
+        this.privateRecipeController = privateRecipeController;
+    }
+
+    public void setRecipeController(RecipeController recipeController) {
+        this.recipeController = recipeController;
+    }
+
+    public void setBookController(BookController bookController) {
+        this.bookController = bookController;
+    }
+
+    public void setAddToBookController(AddToBookController addToBookController) {
+        this.addToBookController = addToBookController;
+    }
+
+    public void setRemoveFromBookController(RemoveFromBookController removeFromBookController) {
+        this.removeFromBookController = removeFromBookController;
+    }
+
+    public void setCreateRecipeController(CreateRecipeController createRecipeController) {
+        this.createRecipeController = createRecipeController;
+    }
+
+    public void setUpdateRecipeController(UpdateRecipeController updateRecipeController) {
+        this.updateRecipeController = updateRecipeController;
+    }
+
+    public void setDeleteRecipeController(DeleteRecipeController deleteRecipeController) {
+        this.deleteRecipeController = deleteRecipeController;
+    }
+
+    public MainController() {
+        super();
+    }
 
     public void handleUserChoice(int choice){
         switch (choice){
@@ -11,46 +61,34 @@ public class MainController extends AbstractController {
                 publicRecipeController.init();
                 break;
             case 2:
-                userRecipeBookController.init();
+                privateRecipeController.init();
                 break;
             case 3:
-                privateRecipeController.init();
-                break;
-            case 4:
-                publicRecipeController.init();
-                privateRecipeController.init();
                 recipeController.init();
                 break;
-            case 5:
+            case 4:
                 bookController.init();
                 break;
-            case 6:
-                publicRecipeController.init(); //show all public so the user chooses which one to add to Book
+            case 5:
                 addToBookController.init();
                 break;
-            case 7:
+            case 6:
                 bookController.init();
                 removeFromBookController.init();
                 break;
-            case 8:
+            case 7:
                 createRecipeController.init();
                 break;
-            case 9:
+            case 8:
                 privateRecipeController.init();
                 updateRecipeController.init();
                 break;
-            case 10:
+            case 9:
                 privateRecipeController.init();
                 deleteRecipeController.init();
                 break;
-            case 11:
-                System.exit(1);
+            case 10:
+                System.exit(69);
         }
-    }
-
-
-
-    public void setUserService(UserServiceImpl userService) {
-        this.userService = userService;
     }
 }

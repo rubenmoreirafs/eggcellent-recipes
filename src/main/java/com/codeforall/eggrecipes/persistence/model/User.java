@@ -7,7 +7,7 @@ import java.util.Set;
 @Entity
 @Table(name = "user")
 public class User extends AbstractModel {
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(
             name = "recipe_book",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -23,6 +23,7 @@ public class User extends AbstractModel {
     public Set<Recipe> getRecipeBook() {
         return recipeBook;
     }
+
     public Recipe removeRecipe(Recipe recipe) {
         recipeBook.remove(recipe);
         return recipe;

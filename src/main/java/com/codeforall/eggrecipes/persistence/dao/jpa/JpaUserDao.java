@@ -3,6 +3,7 @@ package com.codeforall.eggrecipes.persistence.dao.jpa;
 import com.codeforall.eggrecipes.persistence.dao.UserDao;
 import com.codeforall.eggrecipes.persistence.model.Recipe;
 import com.codeforall.eggrecipes.persistence.model.User;
+import org.hibernate.Hibernate;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -91,31 +92,13 @@ public class JpaUserDao implements UserDao {
 		Root<Recipe> root = criteriaQuery.from(Recipe.class);
 
 		criteriaQuery.where(cb.and(
-				cb.equal(root.get("isPrivate"), 0),
+				cb.equal(root.get("isPrivate"), 1),
 				(cb.equal(root.get("ownerId"), userId))));
 
 		TypedQuery<Recipe> qry = em.createQuery(criteriaQuery);
 
 		return qry.getResultList();
 
-	}
-
-	// Gets all public recipes from user
-	@Override
-	public List<Recipe> getAllPublicRecipes(Integer userId) {
-		EntityManager em = emF.createEntityManager();
-
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<Recipe> criteriaQuery = cb.createQuery(Recipe.class);
-		Root<Recipe> root = criteriaQuery.from(Recipe.class);
-
-		criteriaQuery.where(cb.and(
-				cb.equal(root.get("isPrivate"), 1),
-				( cb.equal(root.get("ownerId"), userId))));
-
-		TypedQuery<Recipe> qry = em.createQuery(criteriaQuery);
-
-		return qry.getResultList();
 	}
 
 	// Returns the recipe book of the user that is requesting
@@ -125,7 +108,7 @@ public class JpaUserDao implements UserDao {
 		try {
 			User user = Optional.ofNullable(em.find(User.class, userId))
 					.orElseThrow(() -> new IllegalArgumentException("User does not exist"));
-
+			Hibernate.initialize(user.getRecipeBook());
 			return user.getRecipeBook();
 		} finally {
 			if (em != null) {
@@ -158,7 +141,7 @@ public class JpaUserDao implements UserDao {
 	// deletes a recipe from the user's recipe book on the object
 	// and on the DB
 	@Override
-	public void deleteRecipe(Integer userId, Integer recipeId) {
+	public void removeRecipeFromBook(Integer userId, Integer recipeId) {
 		EntityManager em = emF.createEntityManager();
 		try{
 			User user = em.find(User.class, userId);
@@ -166,7 +149,6 @@ public class JpaUserDao implements UserDao {
 			EntityTransaction tx = em.getTransaction();
 			tx.begin();
 			user.removeRecipe(recipe);
-			em.remove(recipe);
 			tx.commit();
 		} finally {
 			if(em != null) {

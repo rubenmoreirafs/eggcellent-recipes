@@ -1,8 +1,12 @@
 package com.codeforall.eggrecipes.controller;
 
+import com.codeforall.eggrecipes.persistence.model.Ingredient;
 import com.codeforall.eggrecipes.persistence.model.Recipe;
+import com.codeforall.eggrecipes.service.AuthServiceImpl;
+import com.codeforall.eggrecipes.service.IngredientServiceImpl;
 import com.codeforall.eggrecipes.service.RecipeServiceImpl;
 import com.codeforall.eggrecipes.service.UserServiceImpl;
+import com.codeforall.eggrecipes.view.View;
 
 import java.util.List;
 
@@ -11,16 +15,26 @@ public class RecipeController extends AbstractController {
     private View view;
     private UserServiceImpl userService;
     private RecipeServiceImpl recipeService;
-    private PublicRecipesView publicRecipesView;
+    private IngredientServiceImpl ingredientService;
+    private AuthServiceImpl authServiceImpl;
 
-    public void setPublicRecipesView(PublicRecipesView publicRecipesView) {
-        this.publicRecipesView = publicRecipesView;
+    public RecipeController() {
+        super();
+    }
+    public AuthServiceImpl getAuthService() {
+        return authServiceImpl;
     }
 
-    private AuthService authService;
+    public void setUserService(UserServiceImpl userService) {
+        this.userService = userService;
+    }
 
-    public AuthService getAuthService() {
-        return authService;
+    public IngredientServiceImpl getIngredientService() {
+        return ingredientService;
+    }
+
+    public void setIngredientService(IngredientServiceImpl ingredientService) {
+        this.ingredientService = ingredientService;
     }
 
     public void setRecipeService(RecipeServiceImpl recipeService) {
@@ -33,19 +47,20 @@ public class RecipeController extends AbstractController {
 
 
     public List<Recipe> listAllPublic(){
-        return recipeServiceImpl.getRecipes();
+        return recipeService.findAll();
     }
 
-    public void createRecipe(int recipeId) {
-        recipeService.saveOrUpdate(recipeId);
+    public void createRecipe(Recipe recipe) {
+        recipeService.saveOrUpdate(recipe);
     }
 
     public void deleteRecipe(int recipeId) {
-        userService.deleteRecipe(recipeId);
+        recipeService.deleteRecipe(recipeId);
     }
 
-    public void updateRecipe(int recipeId) {
-        userService.updateRecipe(recipeId);
+    public void updateRecipe(Recipe recipe, Ingredient ingredient) {
+        ingredientService.saveOrUpdate(ingredient);
+        recipeService.saveOrUpdate(recipe);
     }
 
     public Recipe findById(int id) {

@@ -1,4 +1,7 @@
 package com.codeforall.eggrecipes.controller;
 
-public class DeleteRecipeController {
+public class DeleteRecipeController extends AbstractController {
+    public DeleteRecipeController() {
+        super();
+    }
 }

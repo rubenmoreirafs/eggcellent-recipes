@@ -11,8 +11,6 @@ public class UserServiceImpl implements UserService {
 
     private UserDao userDao;
 
-
-
     @Override
     public User get(int id) {
         return userDao.findById(id);
@@ -34,11 +32,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Recipe> getAllPublicRecipes(Integer userId) {
-        return userDao.getAllPublicRecipes(userId);
-    }
-
-    @Override
     public Recipe addRecipeToRecipeBook(Integer userId, Integer recipeId) {
         return userDao.addRecipeToRecipeBook(userId, recipeId);
     }
@@ -54,8 +47,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteRecipe(int userId, int recipeId) {
-        userDao.deleteRecipe(userId, recipeId);
+    public void deleteRecipeFromBook(int userId, int recipeId) {
+        userDao.removeRecipeFromBook(userId, recipeId);
+    }
+
+    @Override
+    public void deleteRecipe(int recipeId) {
+
     }
 
     public UserDao getUserdao() {

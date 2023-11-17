@@ -3,10 +3,14 @@ package com.codeforall.eggrecipes.persistence.dao.jpa;
 import com.codeforall.eggrecipes.persistence.dao.RecipeDao;
 import com.codeforall.eggrecipes.persistence.model.Ingredient;
 import com.codeforall.eggrecipes.persistence.model.Recipe;
+import com.codeforall.eggrecipes.persistence.model.User;
+import org.hibernate.Hibernate;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
@@ -28,6 +32,24 @@ public class JpaRecipeDao implements RecipeDao {
 		return em.createQuery(criteriaQuery).getResultList();
 	}
 
+	// Gets all public recipes from user
+	@Override
+	public List<Recipe> getAllPublicRecipes(Integer userId) {
+		EntityManager em = emF.createEntityManager();
+
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Recipe> criteriaQuery = cb.createQuery(Recipe.class);
+		Root<Recipe> root = criteriaQuery.from(Recipe.class);
+
+		criteriaQuery.where(cb.and(
+				cb.equal(root.get("isPrivate"), 0),
+				( cb.equal(root.get("ownerId"), userId))));
+
+		TypedQuery<Recipe> qry = em.createQuery(criteriaQuery);
+
+		return qry.getResultList();
+	}
+
 	@Override
 	public Recipe findById(Integer id) {
 		EntityManager em = emF.createEntityManager();
@@ -46,7 +68,7 @@ public class JpaRecipeDao implements RecipeDao {
 		try {
 			EntityTransaction tx = em.getTransaction();
 			tx.begin();
-			em.merge(modelObject);
+			Hibernate.initialize(em.merge(modelObject));
 			tx.commit();
 		} finally {
 			if (em != null) {
@@ -58,7 +80,22 @@ public class JpaRecipeDao implements RecipeDao {
 
 	@Override
 	public void delete(Integer id) {
+		EntityManager em = emF.createEntityManager();
 
+		try {
+			Recipe recipe = em.find(Recipe.class, id);
+
+			if (!recipe.isPrivate()) return;
+
+			EntityTransaction tx = em.getTransaction();
+			tx.begin();
+			em.remove(recipe);
+			tx.commit();
+		} finally {
+			if(em != null) {
+				em.close();
+			}
+		}
 	}
 
 
@@ -86,7 +123,7 @@ public class JpaRecipeDao implements RecipeDao {
 			Ingredient ingredient = em.find(Ingredient.class, ingredientId);
 			EntityTransaction tx = em.getTransaction();
 			tx.begin();
-			recipe.addIngredient(ingredient);
+			Hibernate.initialize(recipe.addIngredient(ingredient));
 			em.merge(recipe);
 			tx.commit();
 		} finally {

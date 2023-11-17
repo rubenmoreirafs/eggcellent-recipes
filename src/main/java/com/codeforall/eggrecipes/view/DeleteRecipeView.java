@@ -1,11 +1,22 @@
 package com.codeforall.eggrecipes.view;
 
-import com.codeforall.eggrecipes.model.Recipe;
+import com.codeforall.eggrecipes.controller.RecipeController;
+import com.codeforall.eggrecipes.controller.UserController;
+import com.codeforall.eggrecipes.persistence.model.Recipe;
 import org.academiadecodigo.bootcamp.scanners.string.StringInputScanner;
 
 public class DeleteRecipeView extends AbstractView {
     private Recipe recipe;
     private RecipeController recipeController;
+    private UserController userController;
+
+    public void setRecipeController(RecipeController recipeController) {
+        this.recipeController = recipeController;
+    }
+
+    public void setUserController(UserController userController) {
+        this.userController = userController;
+    }
 
     @Override
     public void show() {
@@ -20,6 +31,6 @@ public class DeleteRecipeView extends AbstractView {
     }
 
     private void deleteRecipe(int id) {
-        recipeController.deleteRecipe(Integer.parseInt(id));
+        recipeController.deleteRecipe(id);
     }
 }

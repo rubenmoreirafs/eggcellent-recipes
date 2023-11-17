@@ -1,6 +1,7 @@
 package com.codeforall.eggrecipes.view;
 
-import com.codeforall.eggrecipes.model.Recipe;
+import com.codeforall.eggrecipes.controller.RecipeController;
+import com.codeforall.eggrecipes.persistence.model.Recipe;
 import org.academiadecodigo.bootcamp.scanners.string.StringInputScanner;
 
 public class RecipeView extends AbstractView {
@@ -22,6 +23,6 @@ public class RecipeView extends AbstractView {
 
     private void showRecipe(int id) {
         Recipe recipe = recipeController.findById(id);
-        System.out.println(recipe);
+        System.out.println(recipe.getName());
     }
 }

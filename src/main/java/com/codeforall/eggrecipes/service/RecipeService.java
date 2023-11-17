@@ -11,15 +11,15 @@ public interface RecipeService {
 
     List<Recipe> findAll();
 
+    List<Recipe> getAllPublicRecipes(Integer userId);
 
     List<Ingredient> getIngredientList(int id);
 
     Recipe saveOrUpdate(Recipe recipe);
 
     void saveOrUpdateIngredientToRecipe(int recipeId, int ingredientId);
+
     void deleteIngredient(int recipeId, int ingredientId);
 
-
-
-
+    void deleteRecipe(int recipeId);
 }

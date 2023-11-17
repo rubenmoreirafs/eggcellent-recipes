@@ -8,9 +8,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
 public class IngredientServiceImpl implements IngredientService {
-
 	private IngredientDao ingredientDao;
 
+	public IngredientServiceImpl() {
+
+	}
 
 	@Override
 	public Ingredient get(Integer id) {

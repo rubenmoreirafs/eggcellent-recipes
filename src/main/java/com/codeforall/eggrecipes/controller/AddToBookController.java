@@ -1,4 +1,9 @@
 package com.codeforall.eggrecipes.controller;
 
-public class AddToBookController {
+import org.hibernate.cache.spi.support.AbstractRegion;
+
+public class AddToBookController extends AbstractController {
+    public AddToBookController() {
+        super();
+    }
 }

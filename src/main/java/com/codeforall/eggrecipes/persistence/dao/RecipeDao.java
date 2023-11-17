@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface RecipeDao extends Dao<Recipe>{
 
-
+	List<Recipe> getAllPublicRecipes(Integer userId);
 	List<Ingredient> getIngredientList(Integer id);
 
 	void saveOrUpdateIngredientToRecipe(Integer recipeId, Integer ingredientId);

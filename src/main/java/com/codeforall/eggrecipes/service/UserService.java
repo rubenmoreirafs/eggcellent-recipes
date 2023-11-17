@@ -16,15 +16,14 @@ public interface UserService {
 
     List<Recipe> getAllPrivateRecipes(Integer userId);
 
-    List<Recipe> getAllPublicRecipes(Integer userId);
-
     Recipe addRecipeToRecipeBook(Integer userId, Integer recipeId);
     public User saveOrUpdate(User user);
 
     public void delete(int id);
 
-    public void deleteRecipe(int userId, int recipeId);
+    public void deleteRecipeFromBook(int userId, int recipeId);
 
+    public void deleteRecipe(int recipeId);
 
 
 }

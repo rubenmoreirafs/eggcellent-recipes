@@ -1,6 +1,5 @@
 package com.codeforall.eggrecipes.service;
 
-import com.codeforall.eggrecipes.persistence.JpaintegrationTestHelper;
 import com.codeforall.eggrecipes.persistence.dao.UserDao;
 import com.codeforall.eggrecipes.persistence.dao.jpa.JpaUserDao;
 import com.codeforall.eggrecipes.persistence.model.Recipe;
@@ -8,12 +7,9 @@ import com.codeforall.eggrecipes.persistence.model.User;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.persistence.EntityManager;
-
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 
@@ -126,8 +122,8 @@ public class UserServiceImplTest  {
 		int fakeUserId = 999;
 		int fakeRecipeId = 999;
 
-		userService.deleteRecipe(fakeUserId,fakeRecipeId);
+		userService.deleteRecipeFromBook(fakeUserId,fakeRecipeId);
 
-		verify(userDao).deleteRecipe(fakeUserId,fakeRecipeId);
+		verify(userDao).removeRecipeFromBook(fakeUserId,fakeRecipeId);
 	}
 }

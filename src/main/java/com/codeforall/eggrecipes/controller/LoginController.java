@@ -1,17 +1,19 @@
 package com.codeforall.eggrecipes.controller;
 
+import com.codeforall.eggrecipes.service.AuthServiceImpl;
+
 public class LoginController extends AbstractController {
 
     private boolean authFailed = false;
     private Controller nextController;
-    private AuthService authService;
+    private AuthServiceImpl authServiceImpl;
 
-    public boolean getAuthFailed(){
+    public boolean isAuthFailed(){
         return authFailed;
     }
 
-    public void setAuthService(AuthService authService){
-        this.authService = authService;
+    public void setAuthService(AuthServiceImpl authServiceImpl){
+        this.authServiceImpl = authServiceImpl;
     }
 
     public void setNextController(Controller nextController) {
@@ -19,7 +21,7 @@ public class LoginController extends AbstractController {
     }
 
     public void login(String email, String password){
-        if (authService.autenticate(email, password)){
+        if (authServiceImpl.authenticate(email, password)){
             nextController.init();
         }
         authFailed = true;

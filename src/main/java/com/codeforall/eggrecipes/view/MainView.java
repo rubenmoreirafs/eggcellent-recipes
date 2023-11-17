@@ -1,5 +1,6 @@
 package com.codeforall.eggrecipes.view;
 
+import com.codeforall.eggrecipes.controller.MainController;
 import org.academiadecodigo.bootcamp.scanners.menu.MenuInputScanner;
 
 public class MainView extends AbstractView {
@@ -15,7 +16,6 @@ public class MainView extends AbstractView {
         buildMenu();
 
         while (true) {
-            displayMenuOptions();
             mainController.handleUserChoice(getUserChoice());
         }
     }
@@ -23,7 +23,6 @@ public class MainView extends AbstractView {
     private void buildMenu() {
         String[] options = {
                 "List all public recipes in DB",
-                "List all recipes in my recipe book",
                 "List my private recipes",
                 "Find recipe by ID",
                 "Show recipe book",
@@ -36,9 +35,6 @@ public class MainView extends AbstractView {
         };
 
         menuInputScanner = new MenuInputScanner(options);
-    }
-
-    private void displayMenuOptions() {
         menuInputScanner.setMessage("Make your selection: ");
     }
 
