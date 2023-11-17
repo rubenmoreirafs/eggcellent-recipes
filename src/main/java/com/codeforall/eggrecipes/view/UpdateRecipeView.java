@@ -5,11 +5,22 @@ import com.codeforall.eggrecipes.persistence.model.Ingredient;
 import com.codeforall.eggrecipes.persistence.model.Recipe;
 import org.academiadecodigo.bootcamp.scanners.string.StringInputScanner;
 
-public class UpdateRecipeView extends AbstractView {
-    private Recipe recipe;
-    private Ingredient ingredient;
-    private RecipeController recipeController;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
+public class UpdateRecipeView extends AbstractView {
+    private RecipeController recipeController;
+    private Map<String, String> recipeDataMap;
+    private List<String> ingredientList;
+    private Recipe recipe;
+
+    public UpdateRecipeView() {
+        super();
+        recipeDataMap = new LinkedHashMap<>();
+        ingredientList = new LinkedList<>();
+    }
 
     public void setRecipeController(RecipeController recipeController) {
         this.recipeController = recipeController;
@@ -27,34 +38,29 @@ public class UpdateRecipeView extends AbstractView {
         int id = Integer.parseInt(prompt.getUserInput(askForId));
         recipe = recipeController.findById(id);
     }
+
     private void getRecipeDetails() {
-        StringInputScanner recipeName = new StringInputScanner();
-        StringInputScanner ingredientName = new StringInputScanner();
-        StringInputScanner instructions = new StringInputScanner();
-        StringInputScanner prepTime = new StringInputScanner();
-        StringInputScanner photoUrl = new StringInputScanner();
+        StringInputScanner question = new StringInputScanner();
 
-        recipeName.setMessage("Recipe name: ");
-        ingredientName.setMessage("Enter ingredient (with measurement)");
-        instructions.setMessage("Instructions: ");
-        prepTime.setMessage("Prep time: ");
-        photoUrl.setMessage("Photo URL: ");
+        question.setMessage("Recipe name: ");
+        recipeDataMap.put("Name", prompt.getUserInput(question));
 
-        recipe.setName(prompt.getUserInput(recipeName));
-
-        for (int i = 0; i < 4; i++) {
-            ingredient = new Ingredient();
-            ingredient.setName(prompt.getUserInput(ingredientName));
-            recipeController.updateRecipe(recipe, ingredient);
+        question.setMessage("Enter ingredient (with measurement): ");
+        for (int i = 0; i < 3; i++) {
+            ingredientList.add(prompt.getUserInput(question));
         }
 
-        recipe.setOwnerId(1); // Hardwiring user ID 1
-        recipe.setName(prompt.getUserInput(instructions));
-        recipe.setPrepTime(Integer.parseInt(prompt.getUserInput(prepTime)));
-        recipe.setPhotoUrl(prompt.getUserInput(photoUrl));
+        question.setMessage("Instructions: ");
+        recipeDataMap.put("Instructions", prompt.getUserInput(question));
+
+        question.setMessage("Prep time: ");
+        recipeDataMap.put("PrepTime", prompt.getUserInput(question));
+
+        question.setMessage("Photo URL: ");
+        recipeDataMap.put("PhotoURL", prompt.getUserInput(question));
     }
 
     private void updateRecipe() {
-        recipeController.updateRecipe(recipe, ingredient);
+        recipeController.updateRecipe(recipeDataMap, ingredientList);
     }
 }

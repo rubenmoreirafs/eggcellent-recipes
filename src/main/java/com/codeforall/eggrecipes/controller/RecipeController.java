@@ -59,9 +59,8 @@ public class RecipeController extends AbstractController {
         recipeService.deleteRecipe(recipeId);
     }
 
-    public void updateRecipe(Recipe recipe, Ingredient ingredient) {
-        ingredientService.saveOrUpdate(ingredient);
-//        recipeService.saveOrUpdate(recipe);
+    public void updateRecipe(Map<String, String> recipeData, List<String> ingredientList) {
+        recipeService.saveOrUpdate(recipeData, ingredientList);
     }
 
     public Recipe findById(int id) {

@@ -9,8 +9,8 @@ import java.util.*;
 
 public class CreateRecipeView extends AbstractView {
     private RecipeController recipeController;
-    private Map<String, String> recipeDataMap;
-    private List<String> ingredientList;
+    private final Map<String, String> recipeDataMap;
+    private final List<String> ingredientList;
 
     public CreateRecipeView() {
         super();
@@ -25,6 +25,7 @@ public class CreateRecipeView extends AbstractView {
     @Override
     public void show() {
         getRecipeDetails();
+        createRecipe();
     }
 
     private void getRecipeDetails() {
@@ -46,7 +47,9 @@ public class CreateRecipeView extends AbstractView {
 
         question.setMessage("Photo URL: ");
         recipeDataMap.put("PhotoURL", prompt.getUserInput(question));
+    }
 
+    private void createRecipe() {
         recipeController.createRecipe(recipeDataMap, ingredientList);
     }
 }
