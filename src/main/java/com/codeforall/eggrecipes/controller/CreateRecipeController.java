@@ -5,4 +5,5 @@ public class CreateRecipeController extends AbstractController {
         super();
     }
 
+
 }

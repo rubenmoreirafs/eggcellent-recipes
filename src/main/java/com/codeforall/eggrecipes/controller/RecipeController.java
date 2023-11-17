@@ -9,6 +9,7 @@ import com.codeforall.eggrecipes.service.UserServiceImpl;
 import com.codeforall.eggrecipes.view.View;
 
 import java.util.List;
+import java.util.Map;
 
 public class RecipeController extends AbstractController {
 
@@ -50,8 +51,8 @@ public class RecipeController extends AbstractController {
         return recipeService.findAll();
     }
 
-    public void createRecipe(Recipe recipe) {
-        recipeService.saveOrUpdate(recipe);
+    public void createRecipe(Map<String, String> recipeData, List<String> ingredientList) {
+        recipeService.saveOrUpdate(recipeData, ingredientList);
     }
 
     public void deleteRecipe(int recipeId) {
@@ -60,7 +61,7 @@ public class RecipeController extends AbstractController {
 
     public void updateRecipe(Recipe recipe, Ingredient ingredient) {
         ingredientService.saveOrUpdate(ingredient);
-        recipeService.saveOrUpdate(recipe);
+//        recipeService.saveOrUpdate(recipe);
     }
 
     public Recipe findById(int id) {

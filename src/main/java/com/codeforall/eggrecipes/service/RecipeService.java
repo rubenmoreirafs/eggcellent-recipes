@@ -4,6 +4,7 @@ import com.codeforall.eggrecipes.persistence.model.Ingredient;
 import com.codeforall.eggrecipes.persistence.model.Recipe;
 
 import java.util.List;
+import java.util.Map;
 
 public interface RecipeService {
 
@@ -15,7 +16,7 @@ public interface RecipeService {
 
     List<Ingredient> getIngredientList(int id);
 
-    Recipe saveOrUpdate(Recipe recipe);
+    Recipe saveOrUpdate(Map<String, String> recipeData, List<String> ingredientList);
 
     void saveOrUpdateIngredientToRecipe(int recipeId, int ingredientId);
 
