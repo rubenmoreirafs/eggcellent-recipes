@@ -123,8 +123,10 @@ public class JpaRecipeDao implements RecipeDao {
 			Ingredient ingredient = em.find(Ingredient.class, ingredientId);
 			EntityTransaction tx = em.getTransaction();
 			tx.begin();
-			Hibernate.initialize(recipe.addIngredient(ingredient));
-			em.merge(recipe);
+			//Hibernate.initialize()
+			recipe.getIngredientList().add(ingredient);
+			//em.merge(recipe);
+//			recipe.addIngredient(ingredient);
 			tx.commit();
 		} finally {
 			if(em != null) {

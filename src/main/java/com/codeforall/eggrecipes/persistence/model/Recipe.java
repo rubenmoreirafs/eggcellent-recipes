@@ -12,7 +12,8 @@ public class Recipe extends AbstractModel{
     @OneToMany(
             cascade = {CascadeType.ALL},
             orphanRemoval = true,
-            mappedBy = "recipe"
+            mappedBy = "recipe",
+            fetch = FetchType.EAGER
     )
     private List<Ingredient> ingredientList = new ArrayList<>();
 

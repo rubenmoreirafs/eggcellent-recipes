@@ -48,29 +48,15 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public Recipe saveOrUpdate(Map<String, String> recipeData, List<String> ingredientList) {
-        Recipe recipe = new Recipe();
-        Ingredient ingredient = new Ingredient();
-
-        recipe.setName(recipeData.get("Name"));
-        recipe.setInstructions(recipeData.get("Instructions"));
-        recipe.setPrepTime(Integer.parseInt(recipeData.get("PrepTime")));
-        recipe.setPhotoUrl(recipeData.get("PhotoURL"));
-        recipe.setPrivate(true);
-        recipe.setOwnerId(1); // Temporarily hardwiring owner ID
-
-        for (String ingredientString : ingredientList) {
-            ingredient.setName(ingredientString);
-            recipe.addIngredient(ingredient);
-        }
-
+    public Recipe saveOrUpdate(Recipe recipe) {
         return recipeDao.saveOrUpdate(recipe);
     }
 
     @Override
-    public void saveOrUpdateIngredientToRecipe(int recipeId, int ingredientId)  {
-
-        recipeDao.saveOrUpdateIngredientToRecipe(recipeId, ingredientId);
+    public void saveOrUpdateIngredientToRecipe(int recipeId, Ingredient ingredient)  {
+        Recipe recipe = recipeDao.findById(recipeId);
+        recipe.addIngredient(ingredient);
+        recipeDao.saveOrUpdate(recipe);
     }
 
     @Override

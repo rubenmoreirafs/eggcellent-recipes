@@ -1,8 +1,6 @@
 package com.codeforall.eggrecipes.view;
 
 import com.codeforall.eggrecipes.controller.RecipeController;
-import com.codeforall.eggrecipes.persistence.model.Ingredient;
-import com.codeforall.eggrecipes.persistence.model.Recipe;
 import org.academiadecodigo.bootcamp.scanners.string.StringInputScanner;
 
 import java.util.LinkedHashMap;
@@ -14,7 +12,7 @@ public class UpdateRecipeView extends AbstractView {
     private RecipeController recipeController;
     private Map<String, String> recipeDataMap;
     private List<String> ingredientList;
-    private Recipe recipe;
+    private int recipeId;
 
     public UpdateRecipeView() {
         super();
@@ -28,15 +26,15 @@ public class UpdateRecipeView extends AbstractView {
 
     @Override
     public void show() {
-        getRecipeToUpdate();
+        getRecipeIdToUpdate();
         getRecipeDetails();
+        updateRecipe();
     }
 
-    private void getRecipeToUpdate() {
+    private void getRecipeIdToUpdate() {
         StringInputScanner askForId = new StringInputScanner();
         askForId.setMessage("Enter ID of recipe to update: ");
-        int id = Integer.parseInt(prompt.getUserInput(askForId));
-        recipe = recipeController.findById(id);
+        recipeId = Integer.parseInt(prompt.getUserInput(askForId));
     }
 
     private void getRecipeDetails() {
@@ -61,6 +59,6 @@ public class UpdateRecipeView extends AbstractView {
     }
 
     private void updateRecipe() {
-        recipeController.updateRecipe(recipeDataMap, ingredientList);
+        recipeController.updateRecipe(recipeDataMap, ingredientList, recipeId);
     }
 }

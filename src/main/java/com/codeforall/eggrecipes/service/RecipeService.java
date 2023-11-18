@@ -16,9 +16,9 @@ public interface RecipeService {
 
     List<Ingredient> getIngredientList(int id);
 
-    Recipe saveOrUpdate(Map<String, String> recipeData, List<String> ingredientList);
+    Recipe saveOrUpdate(Recipe recipe);
 
-    void saveOrUpdateIngredientToRecipe(int recipeId, int ingredientId);
+    void saveOrUpdateIngredientToRecipe(int recipeId, Ingredient ingredient);
 
     void deleteIngredient(int recipeId, int ingredientId);
 

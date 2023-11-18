@@ -2,10 +2,7 @@ package com.codeforall.eggrecipes.controller;
 
 import com.codeforall.eggrecipes.persistence.model.Ingredient;
 import com.codeforall.eggrecipes.persistence.model.Recipe;
-import com.codeforall.eggrecipes.service.AuthServiceImpl;
-import com.codeforall.eggrecipes.service.IngredientServiceImpl;
-import com.codeforall.eggrecipes.service.RecipeServiceImpl;
-import com.codeforall.eggrecipes.service.UserServiceImpl;
+import com.codeforall.eggrecipes.service.*;
 import com.codeforall.eggrecipes.view.View;
 
 import java.util.List;
@@ -52,15 +49,50 @@ public class RecipeController extends AbstractController {
     }
 
     public void createRecipe(Map<String, String> recipeData, List<String> ingredientList) {
-        recipeService.saveOrUpdate(recipeData, ingredientList);
+        Recipe recipe = new Recipe();
+
+        recipe.setName(recipeData.get("Name"));
+        recipe.setInstructions(recipeData.get("Instructions"));
+        recipe.setPrepTime(Integer.parseInt(recipeData.get("PrepTime")));
+        recipe.setPhotoUrl(recipeData.get("PhotoURL"));
+        recipe.setPrivate(true);
+        recipe.setOwnerId(1); // Temporarily hardwiring owner ID
+
+        for (String ingredientString : ingredientList) {
+            Ingredient ingredient = new Ingredient();
+            ingredient.setName(ingredientString);
+            ingredient.setRecipe(recipe);
+            recipe.addIngredient(ingredient);
+            System.out.println(recipe.getId());
+//            recipeService.saveOrUpdateIngredientToRecipe(recipe.getId(), ingredient);
+        }
+
+        recipeService.saveOrUpdate(recipe);
     }
 
     public void deleteRecipe(int recipeId) {
         recipeService.deleteRecipe(recipeId);
     }
 
-    public void updateRecipe(Map<String, String> recipeData, List<String> ingredientList) {
-        recipeService.saveOrUpdate(recipeData, ingredientList);
+    public void updateRecipe(Map<String, String> recipeData, List<String> ingredientList, int recipeId) {
+        Recipe recipe = recipeService.get(recipeId);
+
+        recipe.setName(recipeData.get("Name"));
+        recipe.setInstructions(recipeData.get("Instructions"));
+        recipe.setPrepTime(Integer.parseInt(recipeData.get("PrepTime")));
+        recipe.setPhotoUrl(recipeData.get("PhotoURL"));
+        recipe.setPrivate(true);
+        recipe.setOwnerId(1); // Temporarily hardwiring owner ID
+
+        for (String ingredientString : ingredientList) {
+            Ingredient ingredient = new Ingredient();
+            ingredient.setName(ingredientString);
+            ingredient.setRecipe(recipe);
+            ingredientService.saveOrUpdate(ingredient);
+            recipeService.saveOrUpdateIngredientToRecipe(recipeId,ingredient);
+        }
+
+        recipeService.saveOrUpdate(recipe);
     }
 
     public Recipe findById(int id) {
