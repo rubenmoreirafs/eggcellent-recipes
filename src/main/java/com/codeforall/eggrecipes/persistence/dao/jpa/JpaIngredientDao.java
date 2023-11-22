@@ -2,18 +2,24 @@ package com.codeforall.eggrecipes.persistence.dao.jpa;
 
 import com.codeforall.eggrecipes.persistence.dao.IngredientDao;
 import com.codeforall.eggrecipes.persistence.model.Ingredient;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
+@Repository
 public class JpaIngredientDao implements IngredientDao {
-	EntityManagerFactory emF;
 
-	public JpaIngredientDao(EntityManagerFactory emF) {
-		this.emF = emF;
+	@PersistenceContext
+	protected  EntityManager em;
+
+	public void setEm(EntityManager em) {
+		this.em = em;
 	}
+
 
 	@Override
 	public List<Ingredient> findAll() {
@@ -22,30 +28,12 @@ public class JpaIngredientDao implements IngredientDao {
 
 	@Override
 	public Ingredient findById(Integer id) {
-		EntityManager em =  emF.createEntityManager();
-		try {
 			return em.find(Ingredient.class, id);
-		} finally {
-			if(em != null) {
-				em.close();
-			}
-		}
 	}
 
 	@Override
 	public Ingredient saveOrUpdate(Ingredient modelObject) {
-		EntityManager em = emF.createEntityManager();
-		try {
-			EntityTransaction tx = em.getTransaction();
-			tx.begin();
-			em.merge(modelObject);
-			tx.commit();
-			return modelObject;
-		} finally {
-			if(em != null) {
-				em.close();
-			}
-		}
+		return em.merge(modelObject);
 	}
 
 	@Override

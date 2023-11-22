@@ -16,7 +16,7 @@ CREATE TABLE recipe(
     id INTEGER AUTO_INCREMENT,
     name VARCHAR(20) NOT NULL,
     is_private BOOL DEFAULT 1,
-    instructions TEXT NOT NULL,
+    instructions VARCHAR(255) NOT NULL,
     owner_id INTEGER  NOT NULL,
     creation_date DATE,
     prep_time INTEGER,

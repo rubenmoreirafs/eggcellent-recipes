@@ -7,7 +7,9 @@ import java.util.*;
 @Table(name = "recipe")
 public class Recipe extends AbstractModel{
 
-    @ManyToMany(mappedBy = "recipeBook")
+    @ManyToMany(
+            mappedBy = "recipeBook"
+    )
     private Set<User> userList = new HashSet<>();
     @OneToMany(
             cascade = {CascadeType.ALL},
@@ -18,6 +20,8 @@ public class Recipe extends AbstractModel{
     private List<Ingredient> ingredientList = new ArrayList<>();
 
     private String name;
+
+
 
     @Column(
             name = "is_private"
@@ -114,6 +118,10 @@ public class Recipe extends AbstractModel{
 
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
+    }
+
+    public Boolean getPrivate() {
+        return isPrivate;
     }
 
     public void setPrivate(boolean aPrivate) {

@@ -2,23 +2,21 @@ package com.codeforall.eggrecipes.service;
 
 import com.codeforall.eggrecipes.persistence.dao.IngredientDao;
 import com.codeforall.eggrecipes.persistence.dao.RecipeDao;
-import com.codeforall.eggrecipes.persistence.dao.UserDao;
 import com.codeforall.eggrecipes.persistence.model.Ingredient;
 import com.codeforall.eggrecipes.persistence.model.Recipe;
-import com.codeforall.eggrecipes.persistence.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
+@Service
 public class RecipeServiceImpl implements RecipeService {
 
     private RecipeDao recipeDao;
     private IngredientDao ingredientDao;
 
+    @Autowired
     public void setIngredientDao(IngredientDao ingredientDao) {
         this.ingredientDao = ingredientDao;
     }
@@ -34,24 +32,24 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public List<Recipe> findAll() {
-        return recipeDao.getAllPublicRecipes(1);
+        return recipeDao.findAll();
     }
 
     @Override
-    public List<Recipe> getAllPublicRecipes(Integer userId) {
-        return recipeDao.getAllPublicRecipes(userId);
+    public List<Recipe> getAllPublicRecipes() {
+        return recipeDao.getAllPublicRecipes();
     }
 
     @Override
     public List<Ingredient> getIngredientList(int id) {
         return recipeDao.getIngredientList(id);
     }
-
+    @Transactional
     @Override
     public Recipe saveOrUpdate(Recipe recipe) {
         return recipeDao.saveOrUpdate(recipe);
     }
-
+    @Transactional
     @Override
     public void saveOrUpdateIngredientToRecipe(int recipeId, Ingredient ingredient)  {
         Recipe recipe = recipeDao.findById(recipeId);
@@ -59,11 +57,12 @@ public class RecipeServiceImpl implements RecipeService {
         recipeDao.saveOrUpdate(recipe);
     }
 
+    @Transactional
     @Override
     public void deleteIngredient(int recipeId, int ingredientId) {
         recipeDao.deleteIngredient(recipeId, ingredientId);
     }
-
+    @Transactional
     @Override
     public void deleteRecipe(int recipeId) {
         recipeDao.delete(recipeId);
@@ -73,6 +72,7 @@ public class RecipeServiceImpl implements RecipeService {
         return recipeDao;
     }
 
+    @Autowired
     public void setRecipeDao(RecipeDao recipeDao) {
         this.recipeDao = recipeDao;
     }

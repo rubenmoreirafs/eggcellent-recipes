@@ -12,7 +12,7 @@ public interface RecipeService {
 
     List<Recipe> findAll();
 
-    List<Recipe> getAllPublicRecipes(Integer userId);
+    List<Recipe> getAllPublicRecipes();
 
     List<Ingredient> getIngredientList(int id);
 

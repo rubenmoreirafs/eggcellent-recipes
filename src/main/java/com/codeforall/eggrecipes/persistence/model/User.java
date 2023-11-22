@@ -1,5 +1,8 @@
 package com.codeforall.eggrecipes.persistence.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -7,7 +10,10 @@ import java.util.Set;
 @Entity
 @Table(name = "user")
 public class User extends AbstractModel {
-    @ManyToMany(cascade = CascadeType.REMOVE)
+    @ManyToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER
+    )
     @JoinTable(
             name = "recipe_book",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -15,7 +21,6 @@ public class User extends AbstractModel {
     )
     private Set<Recipe> recipeBook = new HashSet<>();
     private String username;
-    @Transient
     private String password;
     private String email;
 
@@ -57,4 +62,6 @@ public class User extends AbstractModel {
     public void setEmail(String email) {
         this.email = email;
     }
+
+
 }

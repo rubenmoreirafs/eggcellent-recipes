@@ -16,7 +16,7 @@ public interface UserService {
 
     List<Recipe> getAllPrivateRecipes(Integer userId);
 
-    Recipe addRecipeToRecipeBook(Integer userId, Integer recipeId);
+    public Recipe addRecipeToRecipeBook(Integer userId, Recipe recipe);
     public User saveOrUpdate(User user);
 
     public void delete(int id);

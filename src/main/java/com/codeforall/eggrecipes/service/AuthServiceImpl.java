@@ -1,7 +1,9 @@
 package com.codeforall.eggrecipes.service;
 
 import com.codeforall.eggrecipes.persistence.model.User;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AuthServiceImpl implements AuthService {
     private User currentUser;
 
