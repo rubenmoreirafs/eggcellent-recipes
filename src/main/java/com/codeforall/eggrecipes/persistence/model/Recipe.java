@@ -29,12 +29,12 @@ public class Recipe extends AbstractModel{
     private Boolean isPrivate;
     private String instructions;
     @Column(name = "owner_id")
-    private int ownerId;
+    private Integer ownerId;
     @Column(name = "creation_date")
     private Date creationDate;
 
     @Column(name = "prep_time")
-    private int prepTime;
+    private Integer prepTime;
 
     @Column(name = "photo_url")
     private String photoUrl;
@@ -88,11 +88,11 @@ public class Recipe extends AbstractModel{
         this.instructions = instructions;
     }
 
-    public int getOwnerId() {
+    public Integer getOwnerId() {
         return ownerId;
     }
 
-    public void setOwnerId(int ownerId) {
+    public void setOwnerId(Integer ownerId) {
         this.ownerId = ownerId;
     }
 
@@ -104,11 +104,11 @@ public class Recipe extends AbstractModel{
         this.creationDate = creationDate;
     }
 
-    public int getPrepTime() {
+    public Integer getPrepTime() {
         return prepTime;
     }
 
-    public void setPrepTime(int prepTime) {
+    public void setPrepTime(Integer prepTime) {
         this.prepTime = prepTime;
     }
 

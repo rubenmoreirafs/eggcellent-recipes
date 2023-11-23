@@ -141,7 +141,7 @@ public class RestUserController {
 	// Method to add a recipe that is on the db to the user
 
 	@RequestMapping(method = RequestMethod.POST, path = "/{uid}/recipe")
-	public ResponseEntity<?> addRecipeToRecipeBook(@PathVariable Integer uid, @Valid @RequestBody RecipeDto recipeDto, BindingResult bindingResult, UriComponentsBuilder uriComponentsBuilder) {
+	public ResponseEntity<?> addRecipeToRecipeBook(@PathVariable Integer uid,@RequestBody RecipeDto recipeDto, BindingResult bindingResult, UriComponentsBuilder uriComponentsBuilder) {
 
 		if (bindingResult.hasErrors() || recipeDto.getId() != null) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -150,9 +150,9 @@ public class RestUserController {
 			Recipe recipe = recipeDtoToRecipe.convert(recipeDto);
 			recipe.setOwnerId(uid);
 			userService.addRecipeToRecipeBook(uid, recipe);
-			UriComponents uriComponents = uriComponentsBuilder.path("/api/customer/" + uid + "/recipe/" + recipe.getId()).build();
+			UriComponents uriRecipe = uriComponentsBuilder.path("/api/customer/" + uid + "/recipe/" + recipe.getId()).build();
 			HttpHeaders headers = new HttpHeaders();
-			headers.setLocation(uriComponents.toUri());
+			headers.setLocation(uriRecipe.toUri());
 			return new ResponseEntity<>(headers, HttpStatus.CREATED);
 
 	}
@@ -180,6 +180,7 @@ public class RestUserController {
 		}
 
 		recipeDto.setId(rid);
+		recipeDto.setOwnerId(uid);
 		recipeService.saveOrUpdate(recipeDtoToRecipe.convert(recipeDto));
 
 		return new ResponseEntity<>(HttpStatus.OK);

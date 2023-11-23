@@ -62,7 +62,6 @@ public class JpaRecipeDao implements RecipeDao {
 	public void delete(Integer id) {
 			Recipe recipe = em.find(Recipe.class, id);
 
-			if (!recipe.isPrivate()) return;
 
 			em.remove(recipe);
 	}

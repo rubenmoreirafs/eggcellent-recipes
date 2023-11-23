@@ -124,6 +124,9 @@ public class RestRecipeController {
 		if (bindingResult.hasErrors() || recipeDto.getId() != null) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
+		if(recipeDto.getOwnerId() == null) {
+			recipeDto.setOwnerId(1);
+		}
 
 		Recipe savedRecipe = recipeService.saveOrUpdate(recipeDtoToRecipe.convert(recipeDto));
 
@@ -142,7 +145,7 @@ public class RestRecipeController {
 
 
 	// Method to add ingredients of a recipe
-
+// this is already mapped by 	addrecipetorecipebook
 	@RequestMapping(method = RequestMethod.POST, path = "/{rid}/ingredient")
 	public ResponseEntity<?> addIngredientToIngredientList(@PathVariable Integer rid, @Valid @RequestBody IngredientDto ingredientDto, BindingResult bindingResult, UriComponentsBuilder uriComponentsBuilder) {
 
@@ -153,9 +156,9 @@ public class RestRecipeController {
 			Ingredient ingredient = ingredientDtoToIngredient.convert(ingredientDto);
 			ingredient.setRecipe(recipeService.get(rid));
 			recipeService.saveOrUpdateIngredientToRecipe(rid, ingredient);
-			UriComponents uriComponents = uriComponentsBuilder.path("/api/recipe/" + rid + "/ingredient/" + ingredient.getId()).build();
+			UriComponents uriIngredient = uriComponentsBuilder.path("/api/recipe/" + rid + "/ingredient/" + ingredient.getId()).build();
 			HttpHeaders headers = new HttpHeaders();
-			headers.setLocation(uriComponents.toUri());
+			headers.setLocation(uriIngredient.toUri());
 			return new ResponseEntity<>(headers, HttpStatus.CREATED);
 
 	}
@@ -190,26 +193,11 @@ public class RestRecipeController {
 	}
 
 
-	// method to add an ingredient to a recipe
-	@RequestMapping(method = RequestMethod.POST, path = "/{rid}/ingredient")
-	public ResponseEntity<?> addRecipeToRecipeBook(@PathVariable Integer rid, @Valid @RequestBody IngredientDto ingredientDto, BindingResult bindingResult, UriComponentsBuilder uriComponentsBuilder) {
 
-		if (bindingResult.hasErrors() || ingredientDto.getId() != null) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-
-		Ingredient ingredient = ingredientDtoToIngredient.convert(ingredientDto);
-		ingredient.setRecipe(recipeService.get(rid));
-		recipeService.saveOrUpdateIngredientToRecipe(rid, ingredient);
-		UriComponents uriComponents = uriComponentsBuilder.path("/api/recipe/" + rid + "/ingredient/" + ingredient.getId()).build();
-		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(uriComponents.toUri());
-		return new ResponseEntity<>(headers, HttpStatus.CREATED);
-	}
 
 	// Method to delete a recipe
 	@RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
-	public ResponseEntity<UserDto> deleteRecipe(@PathVariable Integer id) {
+	public ResponseEntity<RecipeDto> deleteRecipe(@PathVariable Integer id) {
 
 
 		recipeService.deleteRecipe(id);

@@ -17,7 +17,7 @@ CREATE TABLE recipe(
     name VARCHAR(20) NOT NULL,
     is_private BOOL DEFAULT 1,
     instructions VARCHAR(255) NOT NULL,
-    owner_id INTEGER  NOT NULL,
+    owner_id INTEGER,
     creation_date DATE,
     prep_time INTEGER,
     photo_url VARCHAR(40),

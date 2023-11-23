@@ -65,6 +65,8 @@ public class RecipeServiceImpl implements RecipeService {
     @Transactional
     @Override
     public void deleteRecipe(int recipeId) {
+        Recipe recipe = recipeDao.findById(recipeId);
+        if (!recipe.isPrivate()) return;
         recipeDao.delete(recipeId);
     }
 

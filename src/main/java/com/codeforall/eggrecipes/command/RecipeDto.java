@@ -13,17 +13,19 @@ public class RecipeDto {
 	@NotBlank(message = "Name is mandatory")
 	@Size(min = 3, max = 64)
 	private String name;
-
+	@NotNull (message = "Access setting is mandatory")
 	private Boolean isPrivate;
-	@NotNull (message = "Name is mandatory")
-	@NotBlank(message = "Name is mandatory")
+	@NotNull (message = "Instructions is mandatory")
+	@NotBlank(message = "INstructions is mandatory")
 	private String instructions;
+
 
 	private Integer ownerId;
 
 
 	private Date creationDate;
 
+	@NotNull (message = "Prep time is mandatory")
 	private Integer prepTime;
 
 	private String photoUrl;
@@ -53,7 +55,7 @@ public class RecipeDto {
 		this.instructions = instructions;
 	}
 
-	public int getOwnerId() {
+	public Integer getOwnerId() {
 		return ownerId;
 	}
 
