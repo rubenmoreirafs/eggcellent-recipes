@@ -14,7 +14,7 @@ import java.util.List;
 public class JpaIngredientDao implements IngredientDao {
 
 	@PersistenceContext
-	protected  EntityManager em;
+	protected EntityManager em;
 
 	public void setEm(EntityManager em) {
 		this.em = em;

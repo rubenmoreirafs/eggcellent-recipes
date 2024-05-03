@@ -1,5 +1,7 @@
 package com.codeforall.eggrecipes.command;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -22,7 +24,7 @@ public class RecipeDto {
 
 	private Integer ownerId;
 
-
+	@JsonFormat
 	private Date creationDate;
 
 	@NotNull (message = "Prep time is mandatory")

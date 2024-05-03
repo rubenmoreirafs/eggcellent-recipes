@@ -75,7 +75,7 @@ public class RestUserController {
 	// Method to get an individual user
 
 	@RequestMapping(method = RequestMethod.GET, path = "/{id}")
-	public ResponseEntity<UserDto> showCustomer(@PathVariable Integer id) {
+	public ResponseEntity<UserDto> showUser(@PathVariable Integer id) {
 		User user = userService.get(id);
 
 		UserDto userDto = userToUserDto.convert(user);
@@ -186,9 +186,6 @@ public class RestUserController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
-
-
-
 	// Method to edit an already existing user
 
 	@RequestMapping(method = RequestMethod.PUT, path = "/{id}")
@@ -214,7 +211,7 @@ public class RestUserController {
 
 	// Method to delete a user
 	@RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
-	public ResponseEntity<UserDto> deleteCustomer(@PathVariable Integer id) {
+	public ResponseEntity<UserDto> deleteUser(@PathVariable Integer id) {
 
 
 		userService.delete(id);
@@ -225,7 +222,7 @@ public class RestUserController {
 
 	// Method to delete a recipe from a user recipebook
 	@RequestMapping(method = RequestMethod.DELETE, path = "/{uid}/{rid}")
-	public ResponseEntity<RecipeDto> deleteCustomer(@PathVariable Integer uid, @PathVariable Integer rid) {
+	public ResponseEntity<RecipeDto> deleteRecipe(@PathVariable Integer uid, @PathVariable Integer rid) {
 
 		userService.deleteRecipeFromBook(uid, rid);
 
